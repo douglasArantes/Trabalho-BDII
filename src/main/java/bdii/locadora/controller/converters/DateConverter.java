@@ -22,6 +22,6 @@ public class DateConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return ((LocalDate)value).toString();
+        return ((LocalDate)value).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 }

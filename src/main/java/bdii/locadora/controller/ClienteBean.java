@@ -14,7 +14,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
-public class ClienteBean implements Serializable{
+public class ClienteBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,28 +26,37 @@ public class ClienteBean implements Serializable{
     private Cliente clienteAtual;
     private List<Cliente> clientes;
 
-    public ClienteBean(){
+    public ClienteBean() {
         this.clienteAtual = new Cliente();
         clientes = Collections.emptyList();
     }
 
-    public String salvar(){
-        Funcionario func = funcionarioRepository.buscaPorID(3); //Provisório, depois pegar @Funcionario logado
+    public String salvar() {
+        Funcionario func = funcionarioRepository.buscaPorID(4); //Provisório, depois pegar @Funcionario logado
         clienteAtual.setFuncionario(func);
         clienteRepository.salvar(this.clienteAtual);
-        return "branco.xhtml?faces-redirect=true";
+        clientes = null;
+        return "clientes.xhtml?faces-redirect=true";
     }
-    public void atualizar(){
+
+    public String atualizar() {
         clienteRepository.atualizar(clienteAtual);
+        return "clientes.xhtml?faces-redirect=true";
     }
 
-    public List<Cliente> getClientes(){
-        return clientes = clienteRepository.todosClientes();
-    }
-
-    public void excluir(Cliente cliente){
+    public void excluir(Cliente cliente) {
         clienteRepository.excluir(cliente);
     }
+
+
+    public List<Cliente> getClientes() {
+        if (clientes == null || clientes.isEmpty()) {
+            return clientes = clienteRepository.todosClientes();
+        } else {
+            return clientes;
+        }
+    }
+
 
     public Cliente getClienteAtual() {
         return clienteAtual;

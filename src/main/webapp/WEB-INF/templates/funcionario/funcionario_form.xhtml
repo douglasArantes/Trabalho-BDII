@@ -9,7 +9,7 @@
         <p:outputLabel for="login" value="Login"/>
         <p:inputText id="login" value="#{funcionarioBean.funcionarioAtual.login}"/>
         <p:outputLabel for="senha" value="Senha"/>
-        <p:password id="senha" value="#{funcionarioBean.funcionarioAtual.senha}" feedback="true"/>
+        <p:password id="senha" value="#{funcionarioBean.funcionarioAtual.senha}" feedback="true" redisplay="true"/>
         <p:outputLabel for="email" value="Email"/>
         <p:inputText id="email" value="#{funcionarioBean.funcionarioAtual.email}" type="email"/>
         <p:outputLabel for="fone" value="Telefone"/>

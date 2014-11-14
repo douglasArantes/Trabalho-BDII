@@ -8,6 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 @Named
 @ViewScoped
@@ -17,16 +19,37 @@ public class FuncionarioBean implements Serializable {
 
     @Inject
     private FuncionarioRepository funcionarioRepository;
-    private Funcionario funcionarioAtual;
 
-    public FuncionarioBean(){
+    private Funcionario funcionarioAtual;
+    private List<Funcionario> funcionarios;
+
+    public FuncionarioBean() {
         this.funcionarioAtual = new Funcionario();
+        this.funcionarios = Collections.emptyList();
     }
 
-    public String salvar(){
+    public String salvar() {
         System.out.println(funcionarioAtual);
         funcionarioRepository.salvar(funcionarioAtual);
+        funcionarios = null;
         return "branco.xhtml?faces-redirect=true";
+    }
+
+    public String atualizar() {
+        funcionarioRepository.atualizar(funcionarioAtual);
+        return "funcionarios.xhtml?faces-redirect=true";
+    }
+
+    public void excluir(Funcionario funcionario) {
+        funcionarioRepository.excluir(funcionario);
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        if (funcionarios == null || funcionarios.isEmpty()) {
+            return funcionarios = funcionarioRepository.todosFuncionarios();
+        } else {
+            return funcionarios;
+        }
     }
 
     public Funcionario getFuncionarioAtual() {

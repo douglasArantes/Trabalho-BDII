@@ -4,14 +4,15 @@
                 xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
                 template="/WEB-INF/templates/LayoutPadrao.xhtml">
 
-    <ui:define name="titulo">Clientes</ui:define>
+    <ui:define name="titulo">Fucionarios</ui:define>
 
     <ui:define name="content">
 
         <p:growl autoUpdate="true" closable="true"/>
 
-        <p:panel header="Clientes">
-            <p:dataTable id="clientes_dt" value="#{clienteBean.clientes}" var="funcionario" paginator="true" rows="10"
+        <p:panel header="Funcionarios">
+            <p:dataTable id="func_dt" value="#{funcionarioBean.funcionarios}" var="funcionario" paginator="true"
+                         rows="10"
                          rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom">
 
                 <p:column headerText="Codigo">
@@ -20,25 +21,26 @@
                 <p:column headerText="Nome">
                     <h:outputText value="#{funcionario.nome}"/>
                 </p:column>
-                <p:column headerText="RG">
-                    <h:outputText value="#{funcionario.rg}"/>
-                </p:column>
-                <p:column headerText="CPF">
-                    <h:outputText value="#{funcionario.cpf}"/>
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{funcionario.telefone}"/>
                 </p:column>
                 <p:column headerText="Email">
                     <h:outputText value="#{funcionario.email}"/>
                 </p:column>
+                <p:column headerText="Data Admissão">
+                    <h:outputText value="#{funcionario.admissao}" converter="locadora.DateConverter"/>
+                </p:column>
                 <p:column headerText="Opções" style="width:80px">
                     <h:form>
-                        <p:commandButton oncomplete="PF('dial').show();;" ajax="true" update=":form_dial"
+                        <p:commandButton oncomplete="PF('dial').show();" ajax="true" update=":form_dial"
                                          icon="ui-icon-pencil" style="ui-icon width:10px; height:18px;">
-                            <f:setPropertyActionListener target="#{clienteBean.clienteAtual}" value="#{funcionario}"/>
+                            <f:setPropertyActionListener target="#{funcionarioBean.funcionarioAtual}"
+                                                         value="#{funcionario}"/>
                         </p:commandButton>
 
                         <p:commandButton icon="ui-icon-trash"
                                          style="ui-icon width:10px; height:18px;"
-                                         action="#{clienteBean.excluir(funcionario)}" update=":clientes_dt"
+                                         action="#{funcionarioBean.excluir(funcionario)}" update=":func_dt"
                                          ajax="true">
                         </p:commandButton>
                     </h:form>
@@ -46,12 +48,12 @@
             </p:dataTable>
 
             <h:form id="form_dial">
-                <p:dialog id="client_dial" widgetVar="dial" header="Editar Cliente"
+                <p:dialog id="client_dial" widgetVar="dial" header="Editar Funcionario"
                           width="600px" modal="true">
 
-                    <ui:include src="/WEB-INF/templates/cliente/cliente_form.xhtml" />
-                    <p:commandButton value="Atualizar" action="#{clienteBean.atualizar()}"
-                                     icon="ui-icon-disk" />
+                    <ui:include src="/WEB-INF/templates/funcionario/funcionario_form.xhtml"/>
+                    <p:commandButton value="Atualizar" action="#{funcionarioBean.atualizar}"
+                                     icon="ui-icon-disk" update=":func_dt"/>
                 </p:dialog>
             </h:form>
 

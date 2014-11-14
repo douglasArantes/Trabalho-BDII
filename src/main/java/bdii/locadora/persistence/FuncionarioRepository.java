@@ -29,7 +29,7 @@ public class FuncionarioRepository implements Serializable {
 
     @Transactional
     public void excluir(Funcionario funcionario){
-        manager.remove(funcionario);
+        manager.remove(manager.getReference(Funcionario.class, funcionario.getCodigo()));
     }
 
 
