@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: omnifaces-1.8.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.omnifaces/omnifaces/1.8.1/d942d84af6af87016332abfa01d57f69b4e0c62d/omnifaces-1.8.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.omnifaces/omnifaces/1.8.1/bd85ecda489d038094ba369ea49e9331e18b3bdb/omnifaces-1.8.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

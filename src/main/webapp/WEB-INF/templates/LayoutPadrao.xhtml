@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title><ui:insert name="titulo">Locadora de Recursos</ui:insert></title>
+    <h:outputStylesheet library="css" name="sistema.css"/>
+</h:head>
+
+<h:body>
+    <p:ajaxStatus styleClass="ajax-status">
+        <f:facet name="start">
+        </f:facet>
+        <f:facet name="complete">
+            <h:outputText value=""/>
+        </f:facet>
+    </p:ajaxStatus>
+
+    <header>
+        <div style="float: left">
+            <!--<h:link outcome="#">
+                <h:graphicImage library="images" name="BrinqueFelizOnJEE.png"/>
+            </h:link>
+            -->
+        </div>
+
+        <div style="margin-bottom: 0px">
+
+            <h:form style="display: inline-block">
+                <p:menubar styleClass="menu-sistema">
+                    <p:submenu label="Funcionarios">
+                        <p:menuitem value="Cadastar" url="/funcionarios/cadastro_funcionario.xhtml"/>
+                        <p:menuitem value="Listar" url="#"/>
+                    </p:submenu>
+                    <p:submenu label="Clientes">
+                        <p:menuitem value="Cadastrar" url="/clientes/cadastrar_cliente.xhtml"/>
+                        <p:menuitem value="Listar" url="#"/>
+                    </p:submenu>
+                    <p:submenu label="Outro item">
+                        <p:menuitem value="Subitem" url="#"/>
+                        <p:menuitem value="Outro Subitem" url="#"/>
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+    </header>
+
+    <div id="conteudo">
+        <ui:insert name="content"/>
+    </div>
+
+</h:body>
+
+</html>

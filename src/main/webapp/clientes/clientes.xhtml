@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Clientes</ui:define>
+
+    <ui:define name="content">
+
+        <p:panel header="Clientes">
+            <p:dataTable id="clientes_dt" value="#{clienteBean.clientes}" var="cliente" paginator="true" rows="10"
+                         rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom">
+
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{cliente.codigo}"/>
+                </p:column>
+                <p:column headerText="Nome">
+                    <h:outputText value="#{cliente.nome}"/>
+                </p:column>
+                <p:column headerText="RG">
+                    <h:outputText value="#{cliente.rg}"/>
+                </p:column>
+                <p:column headerText="CPF">
+                    <h:outputText value="#{cliente.cpf}"/>
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{cliente.email}"/>
+                </p:column>
+                <p:column headerText="Opções" style="width:80px">
+                    <h:form>
+                        <p:commandButton oncomplete="dial.show()" ajax="true" update=":form_dial"
+                                         icon="ui-icon-pencil" style="ui-icon width: 10px; height:18px;">
+                            <!-- Depois add <f:setPropList -->
+                        </p:commandButton>
+
+                        <p:commandButton icon="ui-icon-trash" style="ui-icon width: 10px; height: 18px;"
+                                         action="#{clienteBean.excluir(cliente)}" ajax="true" update=":clientes_dt">
+                        </p:commandButton>
+                    </h:form>
+                </p:column>
+            </p:dataTable>
+
+            <h:form id="form_dial">
+                <p:dialog id="cliente_dial" widgetVar="dial" header="Editar CLiente"
+                          width="700px" modal="true">
+                    <ui:include src="/WEB-INF/templates/cliente/cliente_form.xhtml"/>
+                    <p:commandButton value="Salvar" action="#{clienteBean.atualizar}" icon="ui-icon-disk"/>
+                    <p:commandButton value="Cancelar" onclick="dial.hide()"/>
+                </p:dialog>
+            </h:form>
+
+        </p:panel>
+    </ui:define>
+</ui:composition>

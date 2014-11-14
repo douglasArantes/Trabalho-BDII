@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid columns="2">
+        <p:outputLabel for="nome" value="Nome"/>
+        <p:inputText id="nome" value="#{clienteBean.clienteAtual.nome}"/>
+        <p:outputLabel for="cpf" value="CPF"/>
+        <p:inputMask id="cpf" value="#{clienteBean.clienteAtual.cpf}" mask="999.999.999.99"/>
+        <p:outputLabel for="rg" value="RG"/>
+        <p:inputMask id="rg" value="#{clienteBean.clienteAtual.rg}" mask="999.999.999"/>
+        <p:outputLabel for="email" value="Email"/>
+        <p:inputText  id="email" value="#{clienteBean.clienteAtual.email}" type="email"/>
+        <p:outputLabel for="end" value="Endereço"/>
+        <p:inputText id="end" value="#{clienteBean.clienteAtual.endereco}"/>
+        <p:outputLabel for="est_civ" value="Estado Civil"/>
+        <p:inputText id="est_civ" value="#{clienteBean.clienteAtual.estadoCivil}"/>
+        <p:outputLabel for="mae" value="Mãe"/>
+        <p:inputText id="mae" value="#{clienteBean.clienteAtual.mae}"/>
+        <p:outputLabel for="pai" value="Pai"/>
+        <p:inputText id="pai" value="#{clienteBean.clienteAtual.pai}"/>
+        <p:outputLabel for="status" value="Status"/>
+        <p:inputText id="status" value="#{clienteBean.clienteAtual.status}"/>
+        <p:outputLabel for="sexo" value="Sexo"/>
+        <p:inputText id="sexo" value="#{clienteBean.clienteAtual.sexo}" maxlength="1"/>
+        <p:outputLabel for="tel" value="Telefoen"/>
+        <p:inputMask id="tel" value="#{clienteBean.clienteAtual.telefone}"  mask="(99)9999-9999"/>
+        <p:outputLabel for="obs" value="Observações"/>
+        <p:inputTextarea id="obs" value="#{clienteBean.clienteAtual.observacoes}"/>
+    </h:panelGrid>
+
+</ui:composition>

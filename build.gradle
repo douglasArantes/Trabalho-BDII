@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url "http://repository.primefaces.org"
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    compile 'org.hibernate:hibernate-core:4.3.7.Final'
+    compile 'org.hibernate:hibernate-entitymanager:4.3.7.Final'
+    compile 'org.hibernate:hibernate-validator:5.1.3.Final'
+    compile 'mysql:mysql-connector-java:5.1.33'
+    compile 'com.sun.faces:jsf-api:2.2.5'
+    compile 'com.sun.faces:jsf-impl:2.2.5'
+    compile 'org.primefaces:primefaces:5.1'
+    compile 'org.primefaces.themes:bootstrap:1.0.10'
+    compile 'org.omnifaces:omnifaces:1.8.1'
+    compile 'org.apache.logging.log4j:log4j-core:2.1'
+    compile 'commons-logging:commons-logging:1.2'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'org.projectlombok:lombok:1.12.6'
+
+    compile group: 'org.jboss.weld', name: 'weld-core', version: '2.2.5.Final'
+    compile group: 'org.jboss.weld.servlet', name: 'weld-servlet-core', version: '2.2.5.Final'
+    runtime group: 'org.jboss', name: 'jandex', version: '1.2.1.Final'
+
+}

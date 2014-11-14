@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package bdii.locadora.model;
+
+import bdii.locadora.utils.jpa.converters.LocalDatePersistenceConverter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "locacao")
+@NamedQueries({
+    @NamedQuery(name = "Locacao.findAll", query = "SELECT l FROM Locacao l")})
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Locacao implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "loc_codigo")
+    private Integer codigo;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "loc_data")
+    @Convert(converter = LocalDatePersistenceConverter.class)
+    private LocalDate data;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "loc_status")
+    private String status;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "loc_preco")
+    private BigDecimal preco;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locacao", fetch = FetchType.LAZY)
+    private List<Devolucao> devolucoes;
+
+    @JoinColumn(name = "FUNCIONARIO_fun_codigo", referencedColumnName = "fun_codigo")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Funcionario funcionario;
+
+    @JoinColumn(name = "CLIENTE_cl_codigo", referencedColumnName = "cl_codigo")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Cliente cliente;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locacao", fetch = FetchType.LAZY)
+    private List<ItemLocacao> itemDeLocacao;
+}

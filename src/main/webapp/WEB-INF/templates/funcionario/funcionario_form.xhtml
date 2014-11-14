@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid columns="2">
+        <p:outputLabel for="nome" value="Nome"/>
+        <p:inputText id="nome" value="#{funcionarioBean.funcionarioAtual.nome}"/>
+        <p:outputLabel for="login" value="Login"/>
+        <p:inputText id="login" value="#{funcionarioBean.funcionarioAtual.login}"/>
+        <p:outputLabel for="senha" value="Senha"/>
+        <p:password id="senha" value="#{funcionarioBean.funcionarioAtual.senha}" feedback="true"/>
+        <p:outputLabel for="email" value="Email"/>
+        <p:inputText id="email" value="#{funcionarioBean.funcionarioAtual.email}" type="email"/>
+        <p:outputLabel for="fone" value="Telefone"/>
+        <p:inputMask id="fone" value="#{funcionarioBean.funcionarioAtual.telefone}" mask="(99)9999-9999"/>
+        <p:outputLabel for="admissao" value="Data Admissão"/>
+        <p:inputMask id="admissao" value="#{funcionarioBean.funcionarioAtual.admissao}" mask="99/99/9999"
+                     converter="locadora.DateConverter"/>
+        <p:outputLabel for="nasc" value="Data Nascimento"/>
+        <p:inputMask id="nasc" value="#{funcionarioBean.funcionarioAtual.nascimento}" mask="99/99/9999"
+                     converter="locadora.DateConverter"/>
+        <p:outputLabel for="end" value="Endereço"/>
+        <p:inputText id="end" value="#{funcionarioBean.funcionarioAtual.endereco}"/>
+    </h:panelGrid>
+</ui:composition>

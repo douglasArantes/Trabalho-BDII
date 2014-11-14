@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="MySQL - locadora@localhost [2]" uuid="df0e4f81-1715-461e-8e40-2b114df74022">
+    <database-info product="MySQL" version="5.6.14" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.31 ( Revision: alexander.soklakov@oracle.com-20140520065950-groqzzbvxprqdmnz )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="locadora"/>
+    <table name="autorizado" schema="" catalog="locadora" type="TABLE">
+      <column name="au_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="au_nome" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="au_descricao" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="au_datanasc" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="au_status" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="CLIENTE_cl_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="au_codigo"/>
+      <foreign-key name="fk_AUTORIZADO_CLIENTE1" columns="CLIENTE_cl_codigo" ref-table="cliente" ref-schema="" ref-catalog="locadora" ref-columns="cl_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_AUTORIZADO_CLIENTE1_idx" unique="false" columns="CLIENTE_cl_codigo"/>
+    </table>
+    <table name="caixa" schema="" catalog="locadora" type="TABLE">
+      <column name="cx_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cx_data" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="cx_valor" sqlType="DECIMAL" precision="19" scale="2" nullable="false" jdbcType="3"/>
+      <column name="cx_status" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FUNCIONARIO_fun_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="cx_codigo"/>
+      <foreign-key name="fk_CAIXA_FUNCIONARIO1" columns="FUNCIONARIO_fun_codigo" ref-table="funcionario" ref-schema="" ref-catalog="locadora" ref-columns="fun_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_CAIXA_has_PAGAMENTO_CAIXA1" table="fluxo_caixa" schema="" catalog="locadora" columns="CAIXA_cx_codigo"/>
+      <index name="fk_CAIXA_FUNCIONARIO1_idx" unique="false" columns="FUNCIONARIO_fun_codigo"/>
+    </table>
+    <table name="cliente" schema="" catalog="locadora" type="TABLE">
+      <column name="cl_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cl_nome" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_endereco" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_telefone" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_estadocivil" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_rg" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_cpf" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_nascimento" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="cl_mae" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_pai" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_email" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_sexo" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="cl_datacadastro" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="cl_status" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cl_obs" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FUNCIONARIO_fun_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="cl_codigo"/>
+      <foreign-key name="fk_CLIENTE_FUNCIONARIO1" columns="FUNCIONARIO_fun_codigo" ref-table="funcionario" ref-schema="" ref-catalog="locadora" ref-columns="fun_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_AUTORIZADO_CLIENTE1" table="autorizado" schema="" catalog="locadora" columns="CLIENTE_cl_codigo"/>
+      <exported-key name="fk_LOCACAO_CLIENTE1" table="locacao" schema="" catalog="locadora" columns="CLIENTE_cl_codigo"/>
+      <exported-key name="fk_RESERVA_CLIENTE1" table="reserva" schema="" catalog="locadora" columns="CLIENTE_cl_codigo"/>
+      <index name="fk_CLIENTE_FUNCIONARIO1_idx" unique="false" columns="FUNCIONARIO_fun_codigo"/>
+    </table>
+    <table name="devolucao" schema="" catalog="locadora" type="TABLE">
+      <column name="dev_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dev_data" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="dev_valor" sqlType="DECIMAL" precision="19" scale="2" nullable="false" jdbcType="3"/>
+      <column name="FUNCIONARIO_fun_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="LOCACAO_loc_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="dev_codigo"/>
+      <foreign-key name="fk_DEVOLUCAO_FUNCIONARIO1" columns="FUNCIONARIO_fun_codigo" ref-table="funcionario" ref-schema="" ref-catalog="locadora" ref-columns="fun_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_DEVOLUCAO_LOCACAO1" columns="LOCACAO_loc_codigo" ref-table="locacao" ref-schema="" ref-catalog="locadora" ref-columns="loc_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_PAGAMENTO_DEVOLUCAO1" table="pagamento" schema="" catalog="locadora" columns="DEVOLUCAO_dev_codigo"/>
+      <index name="fk_DEVOLUCAO_FUNCIONARIO1_idx" unique="false" columns="FUNCIONARIO_fun_codigo"/>
+      <index name="fk_DEVOLUCAO_LOCACAO1_idx" unique="false" columns="LOCACAO_loc_codigo"/>
+    </table>
+    <table name="exemplar" schema="" catalog="locadora" type="TABLE">
+      <column name="exe_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="RECURSO_rec_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="exe_status" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="exe_data" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="FORNECEDOR_forn_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="exe_codigo,RECURSO_rec_codigo"/>
+      <foreign-key name="fk_EXEMPLAR_FORNECEDOR1" columns="FORNECEDOR_forn_codigo" ref-table="fornecedor" ref-schema="" ref-catalog="locadora" ref-columns="forn_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_EXEMPLAR_RECURSO1" columns="RECURSO_rec_codigo" ref-table="recurso" ref-schema="" ref-catalog="locadora" ref-columns="rec_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_ITEM_LOCACAO_EXEMPLAR1" table="item_locacao" schema="" catalog="locadora" columns="EXEMPLAR_exe_codigo,EXEMPLAR_RECURSO_rec_codigo"/>
+      <index name="fk_EXEMPLAR_FORNECEDOR1_idx" unique="false" columns="FORNECEDOR_forn_codigo"/>
+      <index name="fk_EXEMPLAR_RECURSO1_idx" unique="false" columns="RECURSO_rec_codigo"/>
+    </table>
+    <table name="fluxo_caixa" schema="" catalog="locadora" type="TABLE">
+      <column name="CAIXA_cx_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="PAGAMENTO_pag_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="valorpago" sqlType="DECIMAL" precision="19" scale="2" nullable="false" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="CAIXA_cx_codigo,PAGAMENTO_pag_codigo"/>
+      <foreign-key name="fk_CAIXA_has_PAGAMENTO_CAIXA1" columns="CAIXA_cx_codigo" ref-table="caixa" ref-schema="" ref-catalog="locadora" ref-columns="cx_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_CAIXA_has_PAGAMENTO_PAGAMENTO1" columns="PAGAMENTO_pag_codigo" ref-table="pagamento" ref-schema="" ref-catalog="locadora" ref-columns="pag_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_CAIXA_has_PAGAMENTO_CAIXA1_idx" unique="false" columns="CAIXA_cx_codigo"/>
+      <index name="fk_CAIXA_has_PAGAMENTO_PAGAMENTO1_idx" unique="false" columns="PAGAMENTO_pag_codigo"/>
+    </table>
+    <table name="fornecedor" schema="" catalog="locadora" type="TABLE">
+      <column name="forn_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="forn_nome" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="forn_razaosocial" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="forn_endereco" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="forn_cgc" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="forn_email" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="forn_telefone" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="forn_codigo"/>
+      <exported-key name="fk_EXEMPLAR_FORNECEDOR1" table="exemplar" schema="" catalog="locadora" columns="FORNECEDOR_forn_codigo"/>
+    </table>
+    <table name="funcionario" schema="" catalog="locadora" type="TABLE">
+      <column name="fun_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="fun_nome" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fun_endereco" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fun_telefone" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fun_nascimento" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="fun_admissão" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="fun_email" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fun_login" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fun_senha" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="fun_codigo"/>
+      <exported-key name="fk_CAIXA_FUNCIONARIO1" table="caixa" schema="" catalog="locadora" columns="FUNCIONARIO_fun_codigo"/>
+      <exported-key name="fk_CLIENTE_FUNCIONARIO1" table="cliente" schema="" catalog="locadora" columns="FUNCIONARIO_fun_codigo"/>
+      <exported-key name="fk_DEVOLUCAO_FUNCIONARIO1" table="devolucao" schema="" catalog="locadora" columns="FUNCIONARIO_fun_codigo"/>
+      <exported-key name="fk_LOCACAO_FUNCIONARIO1" table="locacao" schema="" catalog="locadora" columns="FUNCIONARIO_fun_codigo"/>
+    </table>
+    <table name="item_locacao" schema="" catalog="locadora" type="TABLE">
+      <column name="it_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="LOCACAO_loc_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="it_datadevolucao" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="it_statusdevolucao" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EXEMPLAR_exe_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="EXEMPLAR_RECURSO_rec_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="it_codigo"/>
+      <foreign-key name="fk_ITEM_LOCACAO_EXEMPLAR1" columns="EXEMPLAR_exe_codigo,EXEMPLAR_RECURSO_rec_codigo" ref-table="exemplar" ref-schema="" ref-catalog="locadora" ref-columns="exe_codigo,RECURSO_rec_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_ITEM_LOCACAO_LOCACAO1" columns="LOCACAO_loc_codigo" ref-table="locacao" ref-schema="" ref-catalog="locadora" ref-columns="loc_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_ITEM_LOCACAO_EXEMPLAR1_idx" unique="false" columns="EXEMPLAR_exe_codigo,EXEMPLAR_RECURSO_rec_codigo"/>
+      <index name="fk_ITEM_LOCACAO_LOCACAO1_idx" unique="false" columns="LOCACAO_loc_codigo"/>
+    </table>
+    <table name="locacao" schema="" catalog="locadora" type="TABLE">
+      <column name="loc_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="loc_data" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="loc_status" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="loc_preco" sqlType="DECIMAL" precision="19" scale="2" nullable="false" jdbcType="3"/>
+      <column name="CLIENTE_cl_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="FUNCIONARIO_fun_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="loc_codigo"/>
+      <foreign-key name="fk_LOCACAO_CLIENTE1" columns="CLIENTE_cl_codigo" ref-table="cliente" ref-schema="" ref-catalog="locadora" ref-columns="cl_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_LOCACAO_FUNCIONARIO1" columns="FUNCIONARIO_fun_codigo" ref-table="funcionario" ref-schema="" ref-catalog="locadora" ref-columns="fun_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_DEVOLUCAO_LOCACAO1" table="devolucao" schema="" catalog="locadora" columns="LOCACAO_loc_codigo"/>
+      <exported-key name="fk_ITEM_LOCACAO_LOCACAO1" table="item_locacao" schema="" catalog="locadora" columns="LOCACAO_loc_codigo"/>
+      <index name="fk_LOCACAO_CLIENTE1_idx" unique="false" columns="CLIENTE_cl_codigo"/>
+      <index name="fk_LOCACAO_FUNCIONARIO1_idx" unique="false" columns="FUNCIONARIO_fun_codigo"/>
+    </table>
+    <table name="pagamento" schema="" catalog="locadora" type="TABLE">
+      <column name="pag_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="pag_status" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pag_data" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="DEVOLUCAO_dev_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="pag_codigo"/>
+      <foreign-key name="fk_PAGAMENTO_DEVOLUCAO1" columns="DEVOLUCAO_dev_codigo" ref-table="devolucao" ref-schema="" ref-catalog="locadora" ref-columns="dev_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_CAIXA_has_PAGAMENTO_PAGAMENTO1" table="fluxo_caixa" schema="" catalog="locadora" columns="PAGAMENTO_pag_codigo"/>
+      <index name="fk_PAGAMENTO_DEVOLUCAO1_idx" unique="false" columns="DEVOLUCAO_dev_codigo"/>
+    </table>
+    <table name="preco" schema="" catalog="locadora" type="TABLE">
+      <column name="pre_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="pre_preco" sqlType="DECIMAL" precision="19" scale="2" nullable="false" jdbcType="3"/>
+      <column name="pre_status" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pre_data" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="pre_codigo"/>
+      <exported-key name="fk_RECURSO_PRECO1" table="recurso" schema="" catalog="locadora" columns="PRECO_pre_codigo"/>
+    </table>
+    <table name="recurso" schema="" catalog="locadora" type="TABLE">
+      <column name="rec_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="rec_nome" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="rec_descricao" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rec_datacadastro" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="rec_obs" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PRECO_pre_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="rec_codigo"/>
+      <foreign-key name="fk_RECURSO_PRECO1" columns="PRECO_pre_codigo" ref-table="preco" ref-schema="" ref-catalog="locadora" ref-columns="pre_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_EXEMPLAR_RECURSO1" table="exemplar" schema="" catalog="locadora" columns="RECURSO_rec_codigo"/>
+      <exported-key name="fk_RESERVA_RECURSO1" table="reserva" schema="" catalog="locadora" columns="RECURSO_rec_codigo"/>
+      <index name="fk_RECURSO_PRECO1_idx" unique="false" columns="PRECO_pre_codigo"/>
+    </table>
+    <table name="reserva" schema="" catalog="locadora" type="TABLE">
+      <column name="res_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="res_obs" sqlType="VARCHAR" precision="512" scale="0" nullable="true" jdbcType="12"/>
+      <column name="res_datareserva" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="CLIENTE_cl_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="RECURSO_rec_codigo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="res_codigo"/>
+      <foreign-key name="fk_RESERVA_CLIENTE1" columns="CLIENTE_cl_codigo" ref-table="cliente" ref-schema="" ref-catalog="locadora" ref-columns="cl_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_RESERVA_RECURSO1" columns="RECURSO_rec_codigo" ref-table="recurso" ref-schema="" ref-catalog="locadora" ref-columns="rec_codigo" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_RESERVA_CLIENTE1_idx" unique="false" columns="CLIENTE_cl_codigo"/>
+      <index name="fk_RESERVA_RECURSO1_idx" unique="false" columns="RECURSO_rec_codigo"/>
+    </table>
+  </data-source>
+</component>
