@@ -10,6 +10,9 @@
         <p:inputMask id="cpf" value="#{clienteBean.clienteAtual.cpf}" mask="999.999.999.99"/>
         <p:outputLabel for="rg" value="RG"/>
         <p:inputMask id="rg" value="#{clienteBean.clienteAtual.rg}" mask="999.999.999"/>
+        <p:outputLabel for="nascimento" value="Data Nascimento"/>
+        <p:inputMask id="nascimento" value="#{clienteBean.clienteAtual.nascimento}" mask="99/99/9999"
+                     converter="locadora.DateConverter"/>
         <p:outputLabel for="email" value="Email"/>
         <p:inputText  id="email" value="#{clienteBean.clienteAtual.email}" type="email"/>
         <p:outputLabel for="end" value="Endereço"/>

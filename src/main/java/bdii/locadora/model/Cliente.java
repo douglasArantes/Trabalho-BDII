@@ -68,7 +68,7 @@ public class Cliente implements Serializable {
     private String cpf;
 
     @Basic(optional = false)
-    @NotNull(message = "--------NÃO PODE SER NULO--------")
+    @NotNull()
     @Column(name = "cl_nascimento")
     @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate nascimento;
@@ -113,7 +113,6 @@ public class Cliente implements Serializable {
 
     public Cliente(){
         this.dataCadastro = LocalDate.now();
-        this.nascimento = dataCadastro.minusYears(20); //mudar depois
     }
 
     @JoinColumn(name = "FUNCIONARIO_fun_codigo", referencedColumnName = "fun_codigo")

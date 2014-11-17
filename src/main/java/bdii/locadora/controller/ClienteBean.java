@@ -5,6 +5,7 @@ import bdii.locadora.model.Funcionario;
 import bdii.locadora.persistence.ClienteRepository;
 import bdii.locadora.persistence.FuncionarioRepository;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,7 +33,7 @@ public class ClienteBean implements Serializable {
     }
 
     public String salvar() {
-        Funcionario func = funcionarioRepository.buscaPorID(4); //Provisório, depois pegar @Funcionario logado
+        Funcionario func = funcionarioRepository.buscaPorID(2); //Provisório, depois pegar @Funcionario logado
         clienteAtual.setFuncionario(func);
         clienteRepository.salvar(this.clienteAtual);
         clientes = null;
@@ -44,8 +45,9 @@ public class ClienteBean implements Serializable {
         return "clientes.xhtml?faces-redirect=true";
     }
 
-    public void excluir(Cliente cliente) {
-        clienteRepository.excluir(cliente);
+    public void excluir(){
+        clienteRepository.excluir(clienteAtual);
+        clientes = null;
     }
 
 

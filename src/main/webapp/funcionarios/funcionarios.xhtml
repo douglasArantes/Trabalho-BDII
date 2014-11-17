@@ -10,42 +10,41 @@
 
         <p:growl autoUpdate="true" closable="true"/>
 
-        <p:panel header="Funcionarios">
-            <p:dataTable id="func_dt" value="#{funcionarioBean.funcionarios}" var="funcionario" paginator="true"
-                         rows="10"
-                         rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom">
+        <p:panel id="panel" header="Funcionarios">
+            <h:form>
+                <p:dataTable id="func_dt" value="#{funcionarioBean.funcionarios}" var="funcionario" paginator="true"
+                             rows="10" rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom" >
 
-                <p:column headerText="Codigo">
-                    <h:outputText value="#{funcionario.codigo}"/>
-                </p:column>
-                <p:column headerText="Nome">
-                    <h:outputText value="#{funcionario.nome}"/>
-                </p:column>
-                <p:column headerText="Telefone">
-                    <h:outputText value="#{funcionario.telefone}"/>
-                </p:column>
-                <p:column headerText="Email">
-                    <h:outputText value="#{funcionario.email}"/>
-                </p:column>
-                <p:column headerText="Data Admissão">
-                    <h:outputText value="#{funcionario.admissao}" converter="locadora.DateConverter"/>
-                </p:column>
-                <p:column headerText="Opções" style="width:80px">
-                    <h:form>
+                    <p:column headerText="Codigo" filterBy="#{funcionario.codigo}" filterMatchMode="exact">
+                        <h:outputText value="#{funcionario.codigo}"/>
+                    </p:column>
+                    <p:column headerText="Nome" filterBy="#{funcionario.nome}" filterMatchMode="contains">
+                        <h:outputText value="#{funcionario.nome}"/>
+                    </p:column>
+                    <p:column headerText="Telefone" filterBy="#{funcionario.telefone}" filterMatchMode="contains">
+                        <h:outputText value="#{funcionario.telefone}"/>
+                    </p:column>
+                    <p:column headerText="Email" filterBy="#{funcionario.email}" filterMatchMode="startsWith">
+                        <h:outputText value="#{funcionario.email}"/>
+                    </p:column>
+                    <p:column headerText="Data Admissão" filterBy="#{funcionario.admissao}" filterMatchMode="contains">
+                        <h:outputText value="#{funcionario.admissao}" converter="locadora.DateConverter"/>
+                    </p:column>
+                    <p:column headerText="Opções" style="width:80px">
                         <p:commandButton oncomplete="PF('dial').show();" ajax="true" update=":form_dial"
                                          icon="ui-icon-pencil" style="ui-icon width:10px; height:18px;">
                             <f:setPropertyActionListener target="#{funcionarioBean.funcionarioAtual}"
                                                          value="#{funcionario}"/>
                         </p:commandButton>
 
-                        <p:commandButton icon="ui-icon-trash"
-                                         style="ui-icon width:10px; height:18px;"
-                                         action="#{funcionarioBean.excluir(funcionario)}" update=":func_dt"
-                                         ajax="true">
+                        <p:commandButton icon="ui-icon-trash" style="ui-icon width:10px; height:18px;"
+                                         action="#{funcionarioBean.excluir()}" update="func_dt" ajax="true">
+                            <f:setPropertyActionListener target="#{funcionarioBean.funcionarioAtual}"
+                                                         value="#{funcionario}"/>
                         </p:commandButton>
-                    </h:form>
-                </p:column>
-            </p:dataTable>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
 
             <h:form id="form_dial">
                 <p:dialog id="client_dial" widgetVar="dial" header="Editar Funcionario"
@@ -53,7 +52,7 @@
 
                     <ui:include src="/WEB-INF/templates/funcionario/funcionario_form.xhtml"/>
                     <p:commandButton value="Atualizar" action="#{funcionarioBean.atualizar}"
-                                     icon="ui-icon-disk" update=":func_dt"/>
+                                     icon="ui-icon-disk" update=":panel"/>
                 </p:dialog>
             </h:form>
 

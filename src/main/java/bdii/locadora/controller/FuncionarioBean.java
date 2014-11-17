@@ -4,6 +4,7 @@ package bdii.locadora.controller;
 import bdii.locadora.model.Funcionario;
 import bdii.locadora.persistence.FuncionarioRepository;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,10 +30,9 @@ public class FuncionarioBean implements Serializable {
     }
 
     public String salvar() {
-        System.out.println(funcionarioAtual);
         funcionarioRepository.salvar(funcionarioAtual);
         funcionarios = null;
-        return "branco.xhtml?faces-redirect=true";
+        return "funcionarios.xhtml?faces-redirect=true";
     }
 
     public String atualizar() {
@@ -40,8 +40,9 @@ public class FuncionarioBean implements Serializable {
         return "funcionarios.xhtml?faces-redirect=true";
     }
 
-    public void excluir(Funcionario funcionario) {
-        funcionarioRepository.excluir(funcionario);
+    public void excluir() {
+        funcionarioRepository.excluir(funcionarioAtual);
+        funcionarios = null;
     }
 
     public List<Funcionario> getFuncionarios() {

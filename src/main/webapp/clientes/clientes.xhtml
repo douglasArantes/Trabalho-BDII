@@ -9,49 +9,47 @@
     <ui:define name="content">
 
         <p:growl autoUpdate="true" closable="true"/>
+        <p:panel id="panel" header="Clientes">
+            <h:form id="form_table">
+                <p:dataTable id="clientes_dt" value="#{clienteBean.clientes}" var="cliente" paginator="true" rows="10"
+                             rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom" >
 
-        <p:panel header="Clientes">
-            <p:dataTable id="clientes_dt" value="#{clienteBean.clientes}" var="funcionario" paginator="true" rows="10"
-                         rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom">
-
-                <p:column headerText="Codigo">
-                    <h:outputText value="#{funcionario.codigo}"/>
-                </p:column>
-                <p:column headerText="Nome">
-                    <h:outputText value="#{funcionario.nome}"/>
-                </p:column>
-                <p:column headerText="RG">
-                    <h:outputText value="#{funcionario.rg}"/>
-                </p:column>
-                <p:column headerText="CPF">
-                    <h:outputText value="#{funcionario.cpf}"/>
-                </p:column>
-                <p:column headerText="Email">
-                    <h:outputText value="#{funcionario.email}"/>
-                </p:column>
-                <p:column headerText="Opções" style="width:80px">
-                    <h:form>
-                        <p:commandButton oncomplete="PF('dial').show();;" ajax="true" update=":form_dial"
+                    <p:column headerText="Codigo" filterBy="#{cliente.codigo}" filterMatchMode="exact">
+                        <h:outputText value="#{cliente.codigo}"/>
+                    </p:column>
+                    <p:column headerText="Nome" filterBy="#{cliente.nome}" filterMatchMode="contains">
+                        <h:outputText value="#{cliente.nome}"/>
+                    </p:column>
+                    <p:column headerText="RG" filterBy="#{cliente.rg}" filterMatchMode="contains">
+                        <h:outputText value="#{cliente.rg}"/>
+                    </p:column>
+                    <p:column headerText="CPF" filterBy="#{cliente.cpf}" filterMatchMode="contains">
+                        <h:outputText value="#{cliente.cpf}"/>
+                    </p:column>
+                    <p:column headerText="Email" filterBy="#{cliente.email}" filterMatchMode="contains">
+                        <h:outputText value="#{cliente.email}"/>
+                    </p:column>
+                    <p:column headerText="Opções" style="width:80px">
+                        <p:commandButton oncomplete="PF('dial').show();" ajax="true" update=":form_dial"
                                          icon="ui-icon-pencil" style="ui-icon width:10px; height:18px;">
-                            <f:setPropertyActionListener target="#{clienteBean.clienteAtual}" value="#{funcionario}"/>
+                            <f:setPropertyActionListener target="#{clienteBean.clienteAtual}" value="#{cliente}"/>
                         </p:commandButton>
 
-                        <p:commandButton icon="ui-icon-trash"
-                                         style="ui-icon width:10px; height:18px;"
-                                         action="#{clienteBean.excluir(funcionario)}" update=":clientes_dt"
-                                         ajax="true">
+                        <p:commandButton icon="ui-icon-trash" style="ui-icon width:10px; height:18px;"
+                                         action="#{clienteBean.excluir()}" update="clientes_dt" ajax="true">
+                            <f:setPropertyActionListener target="#{clienteBean.clienteAtual}" value="#{cliente}"  />
                         </p:commandButton>
-                    </h:form>
-                </p:column>
-            </p:dataTable>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
 
             <h:form id="form_dial">
                 <p:dialog id="client_dial" widgetVar="dial" header="Editar Cliente"
                           width="600px" modal="true">
 
-                    <ui:include src="/WEB-INF/templates/cliente/cliente_form.xhtml" />
+                    <ui:include src="/WEB-INF/templates/cliente/cliente_form.xhtml"/>
                     <p:commandButton value="Atualizar" action="#{clienteBean.atualizar()}"
-                                     icon="ui-icon-disk" />
+                                     icon="ui-icon-disk" update=":panel"/>
                 </p:dialog>
             </h:form>
 
