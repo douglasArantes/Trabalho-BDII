@@ -4,6 +4,7 @@ import bdii.locadora.model.Cliente;
 import bdii.locadora.model.Funcionario;
 import bdii.locadora.persistence.ClienteRepository;
 import bdii.locadora.persistence.FuncionarioRepository;
+import org.primefaces.context.RequestContext;
 
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
@@ -48,6 +49,8 @@ public class ClienteBean implements Serializable {
     public void excluir(){
         clienteRepository.excluir(clienteAtual);
         clientes = null;
+        RequestContext.getCurrentInstance().update("clientes_dt");
+
     }
 
 

@@ -27,7 +27,6 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Preco.findAll", query = "SELECT p FROM Preco p")})
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Preco implements Serializable {
 
@@ -54,6 +53,10 @@ public class Preco implements Serializable {
     @Column(name = "pre_data")
     @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate data;
+
+    public Preco(){
+        this.data = LocalDate.now();
+    }
 
 /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "preco", fetch = FetchType.LAZY)

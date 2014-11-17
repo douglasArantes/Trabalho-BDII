@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid columns="2">
+        <p:outputLabel for="nome" value="Nome"/>
+        <p:inputText id="nome" value="#{recursoBean.recursoAtual.nome}"/>
+        <p:outputLabel for="data_cad" value="Data Cadastro"/>
+        <p:inputText id="data_cad" value="#{recursoBean.recursoAtual.dataCadastro}"/>
+        <p:outputLabel for="desc" value="Descrição"/>
+        <p:inputTextarea id="desc" value="#{recursoBean.recursoAtual.descricao}"/>
+        <p:outputLabel for="obs" value="Observação"/>
+        <p:inputTextarea id="obs" value="#{recursoBean.recursoAtual.observacao}"/>
+    </h:panelGrid>
+
+</ui:composition>

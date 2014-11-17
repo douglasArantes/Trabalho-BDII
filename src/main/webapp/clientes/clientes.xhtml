@@ -10,7 +10,7 @@
 
         <p:growl autoUpdate="true" closable="true"/>
         <p:panel id="panel" header="Clientes">
-            <h:form id="form_table">
+            <h:form id="form_table" prependId="false">
                 <p:dataTable id="clientes_dt" value="#{clienteBean.clientes}" var="cliente" paginator="true" rows="10"
                              rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom" >
 

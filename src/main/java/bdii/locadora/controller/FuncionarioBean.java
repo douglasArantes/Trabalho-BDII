@@ -3,6 +3,7 @@ package bdii.locadora.controller;
 
 import bdii.locadora.model.Funcionario;
 import bdii.locadora.persistence.FuncionarioRepository;
+import org.primefaces.context.RequestContext;
 
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;

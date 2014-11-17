@@ -24,7 +24,6 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Recurso.findAll", query = "SELECT r FROM Recurso r")})
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Recurso implements Serializable {
 
@@ -61,6 +60,10 @@ public class Recurso implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso", fetch = FetchType.LAZY)
     private List<Exemplar> exemplares;
+
+    public Recurso(){
+        this.dataCadastro = LocalDate.now();
+    }
 /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso", fetch = FetchType.LAZY)
     private List<Reserva> reservas;
