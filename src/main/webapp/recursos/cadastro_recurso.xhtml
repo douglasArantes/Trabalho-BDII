@@ -6,6 +6,20 @@
 
     <ui:define name="titulo">Cadastro de Recurso</ui:define>
 
+    <ui:define name="content">
+        <p:panel header="Cadastro de Recurso" style="width:1200px; margin-left:65px;">
+            <h:form>
+                <p:wizard backLabel="Anterior" nextLabel="Próximo">
+                    <p:tab title="Recurso">
+                        <ui:include src="/WEB-INF/templates/recurso/recurso_form.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Preço">
+                        <ui:include src="/WEB-INF/templates/preco/preco_form.xhtml"/>
+                    </p:tab>
+                </p:wizard>
 
-
+                <p:commandButton value="Salvar" action="#{recursoBean.salvar}" ajax="false" icon="ui-icon-disk"/>
+            </h:form>
+        </p:panel>
+    </ui:define>
 </ui:composition>

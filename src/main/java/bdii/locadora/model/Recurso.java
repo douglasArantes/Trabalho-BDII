@@ -49,13 +49,11 @@ public class Recurso implements Serializable {
     @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate dataCadastro;
 
-    //@Lob
-    //@Size(max = 65535)
     @Column(name = "rec_obs", length = 512)
     private String observacao;
 
     @JoinColumn(name = "PRECO_pre_codigo", referencedColumnName = "pre_codigo")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Preco preco;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso", fetch = FetchType.LAZY)

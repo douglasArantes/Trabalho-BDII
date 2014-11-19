@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Recursos</ui:define>
+
+    <ui:define name="content">
+
+        <p:growl autoUpdate="true" closable="true"/>
+
+        <p:panel id="panel" header="Recursos">
+            <h:form>
+                <p:dataTable id="rec_dt" value="#{recursoBean.recursos}" var="recurso" paginator="true"
+                             rows="10" rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom">
+
+                    <p:column headerText="Codigo">
+                        <h:outputText value="#{recurso.codigo}"/>
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{recurso.nome}"/>
+                    </p:column>
+                    <p:column headerText="Data Cadastro">
+                        <h:outputText value="#{recurso.dataCadastro}" converter="locadora.DateConverter"/>
+                    </p:column>
+                    <p:column headerText="Preço">
+                        <h:outputText value="#{recurso.preco.preco}"/>
+                    </p:column>
+                    <p:column headerText="Opções" style="width:80px">
+                        <p:commandButton oncomplete="PF('dial').show();" ajax="true" update=":form_dial"
+                                         icon="ui-icon-pencil" style="ui-icon width:10px; height:18px;">
+                            <f:setPropertyActionListener target="#{recursoBean.recursoAtual}" value="#{recurso}"/>
+                        </p:commandButton>
+
+                        <p:commandButton icon="ui-icon-trash" style="ui-icon width:10px; height:18px;"
+                                         action="#{recursoBean.excluir}" update="rec_dt" ajax="true">
+                            <f:setPropertyActionListener target="#{recursoBean.recursoAtual}" value="#{recurso}"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+
+        <h:form id="form_dial">
+            <p:dialog id="rec_dial" widgetVar="dial" header="Editar Recurso"
+                      width="600px" modal="true">
+
+                <ui:include src="/WEB-INF/templates/recurso/recurso_form.xhtml"/>
+                <p:commandButton value="Atualizar" action="#{recursoBean.atualizar}"
+                                 icon="ui-icon-disk" update=":panel"/>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

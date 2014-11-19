@@ -7,7 +7,8 @@
         <p:outputLabel for="nome" value="Nome"/>
         <p:inputText id="nome" value="#{recursoBean.recursoAtual.nome}"/>
         <p:outputLabel for="data_cad" value="Data Cadastro"/>
-        <p:inputText id="data_cad" value="#{recursoBean.recursoAtual.dataCadastro}"/>
+        <p:inputMask id="data_cad" value="#{recursoBean.recursoAtual.dataCadastro}" mask="99/99/9999"
+                     converter="locadora.DateConverter"/>
         <p:outputLabel for="desc" value="Descrição"/>
         <p:inputTextarea id="desc" value="#{recursoBean.recursoAtual.descricao}"/>
         <p:outputLabel for="obs" value="Observação"/>

@@ -1,5 +1,6 @@
 package bdii.locadora.persistence;
 
+import bdii.locadora.model.Funcionario;
 import bdii.locadora.model.Recurso;
 import bdii.locadora.utils.jpa.Transactional;
 
@@ -28,7 +29,7 @@ public class RecursoRepository implements Serializable {
 
     @Transactional
     public void excluir(Recurso recurso){
-        manager.remove(recurso);
+        manager.remove(manager.getReference(Recurso.class, recurso.getCodigo()));
     }
 
     public List<Recurso> todosRecursos(){
