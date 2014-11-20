@@ -12,9 +12,23 @@
 
         <p:panel id="panel" header="Funcionarios">
             <h:form>
-                <p:dataTable id="func_dt" value="#{funcionarioBean.funcionarios}" var="funcionario" paginator="true"
-                             rows="10" rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom" >
+                <p:contextMenu for="func_dt">
+                    <p:menuitem value="Editar" update=":form_dial" icon="ui-icon-pencil"
+                                oncomplete="PF('dial').show()"/>
 
+                    <!-- Implementar visualização-->
+
+                    <p:menuitem value="Excluir" update="func_dt" icon="ui-icon-trash"
+                                actionListener="#{funcionarioBean.excluir}"/>
+
+                </p:contextMenu>
+                <p:dataTable id="func_dt" value="#{funcionarioBean.funcionarios}" var="funcionario"
+                             rowKey="#{funcionario.codigo}" selection="#{funcionarioBean.funcionarioAtual}"
+                             selectionMode="single" paginator="true" rows="10" rowsPerPageTemplate="5 10 15 20"
+                             paginatorPosition="bottom">
+                    <f:facet name="header">
+                        Clique Direito para Opções!
+                    </f:facet>
                     <p:column headerText="Codigo" filterBy="#{funcionario.codigo}" filterMatchMode="exact">
                         <h:outputText value="#{funcionario.codigo}"/>
                     </p:column>
@@ -29,19 +43,6 @@
                     </p:column>
                     <p:column headerText="Data Admissão" filterBy="#{funcionario.admissao}" filterMatchMode="contains">
                         <h:outputText value="#{funcionario.admissao}" converter="locadora.DateConverter"/>
-                    </p:column>
-                    <p:column headerText="Opções" style="width:80px">
-                        <p:commandButton oncomplete="PF('dial').show();" ajax="true" update=":form_dial"
-                                         icon="ui-icon-pencil" style="ui-icon width:10px; height:18px;">
-                            <f:setPropertyActionListener target="#{funcionarioBean.funcionarioAtual}"
-                                                         value="#{funcionario}"/>
-                        </p:commandButton>
-
-                        <p:commandButton icon="ui-icon-trash" style="ui-icon width:10px; height:18px;"
-                                         action="#{funcionarioBean.excluir()}" update="func_dt" ajax="true">
-                            <f:setPropertyActionListener target="#{funcionarioBean.funcionarioAtual}"
-                                                         value="#{funcionario}"/>
-                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
             </h:form>

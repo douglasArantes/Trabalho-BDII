@@ -10,10 +10,24 @@
 
         <p:growl autoUpdate="true" closable="true"/>
         <p:panel id="panel" header="Clientes">
-            <h:form id="form_table" prependId="false">
-                <p:dataTable id="clientes_dt" value="#{clienteBean.clientes}" var="cliente" paginator="true" rows="10"
-                             rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom" >
+            <h:form id="form_table">
+                <p:contextMenu for="clientes_dt">
+                    <p:menuitem value="Editar" update=":form_dial" icon="ui-icon-pencil"
+                                oncomplete="PF('dial').show()"/>
 
+                    <!-- Implementar visualização-->
+                    <!-- Implementar adição de autorizado-->
+
+                    <p:menuitem value="Excluir" update="clientes_dt" icon="ui-icon-trash"
+                                actionListener="#{clienteBean.excluir}"/>
+
+                </p:contextMenu>
+                <p:dataTable id="clientes_dt" widgetVar="clientes_wv" value="#{clienteBean.clientes}" var="cliente"
+                             rowKey="#{cliente.codigo}" selection="#{clienteBean.clienteAtual}" selectionMode="single"
+                             paginator="true" rows="10" rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom">
+                    <f:facet name="header">
+                        Clique Direito para Opções!
+                    </f:facet>
                     <p:column headerText="Codigo" filterBy="#{cliente.codigo}" filterMatchMode="exact">
                         <h:outputText value="#{cliente.codigo}"/>
                     </p:column>
@@ -28,17 +42,6 @@
                     </p:column>
                     <p:column headerText="Email" filterBy="#{cliente.email}" filterMatchMode="contains">
                         <h:outputText value="#{cliente.email}"/>
-                    </p:column>
-                    <p:column headerText="Opções" style="width:80px">
-                        <p:commandButton oncomplete="PF('dial').show();" ajax="true" update=":form_dial"
-                                         icon="ui-icon-pencil" style="ui-icon width:10px; height:18px;">
-                            <f:setPropertyActionListener target="#{clienteBean.clienteAtual}" value="#{cliente}"/>
-                        </p:commandButton>
-
-                        <p:commandButton icon="ui-icon-trash" style="ui-icon width:10px; height:18px;"
-                                         action="#{clienteBean.excluir()}" update="clientes_dt" ajax="true">
-                            <f:setPropertyActionListener target="#{clienteBean.clienteAtual}" value="#{cliente}"  />
-                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
             </h:form>

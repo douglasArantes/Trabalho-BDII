@@ -9,6 +9,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,7 +18,6 @@ import java.util.List;
 public class RecursoBean implements Serializable {
 
     private Recurso recursoAtual;
-    private Preco preco;
     private List<Recurso> recursos;
 
     @Inject
@@ -25,42 +25,24 @@ public class RecursoBean implements Serializable {
 
     public RecursoBean() {
         this.recursoAtual = new Recurso();
-        this.preco = new Preco();
         this.recursos = Collections.emptyList();
     }
 
     public String salvar() {
-        recursoAtual.setPreco(preco);
         recursoRepository.salvar(recursoAtual);
         recursos = null;
         return "recursos.xhtml?faces-redirect=true";
     }
 
-    public String atualizar(){
+    public String atualizar() {
         recursoRepository.atualizar(recursoAtual);
         return "recursos.xhtml?faces-redirect=true";
     }
 
-    public void excluir(){
+    public void excluir() {
         recursoRepository.excluir(recursoAtual);
         recursos = null;
     }
-
-    public void atualizarPreco(){
-
-    }
-
-    public Recurso getRecursoAtual() {
-        return recursoAtual;
-    }
-    public void setRecursoAtual(Recurso recurso) {
-        this.recursoAtual = recurso;
-    }
-
-    public Preco getPreco() {
-        return preco;
-    }
-
 
     public List<Recurso> getRecursos() {
         if (recursos == null || recursos.isEmpty()) {
@@ -69,4 +51,17 @@ public class RecursoBean implements Serializable {
             return recursos;
         }
     }
+
+    public void setDataAtualParaPreco(){
+        recursoAtual.getPreco().setData(LocalDate.now());
+    }
+
+    public Recurso getRecursoAtual() {
+        return recursoAtual;
+    }
+
+    public void setRecursoAtual(Recurso recurso) {
+        this.recursoAtual = recurso;
+    }
+
 }

@@ -3,7 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
 
-    <h:panelGrid columns="2">
+    <h:panelGrid id="func_form" columns="2">
         <p:outputLabel for="nome" value="Nome"/>
         <p:inputText id="nome" value="#{funcionarioBean.funcionarioAtual.nome}"/>
         <p:outputLabel for="login" value="Login"/>
