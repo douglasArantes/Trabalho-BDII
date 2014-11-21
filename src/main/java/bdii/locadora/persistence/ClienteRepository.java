@@ -33,4 +33,8 @@ public class ClienteRepository implements Serializable{
     public List<Cliente> todosClientes(){
         return manager.createNamedQuery("Cliente.findAll", Cliente.class).getResultList();
     }
+
+    public Cliente buscaPorCodigo(int codigo){
+        return manager.find(Cliente.class, codigo);
+    }
 }

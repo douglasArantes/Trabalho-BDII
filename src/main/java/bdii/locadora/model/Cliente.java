@@ -8,6 +8,7 @@ package bdii.locadora.model;
 
 import bdii.locadora.utils.jpa.converters.LocalDatePersistenceConverter;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import javax.validation.constraints.Size;
 @Table(name = "cliente")
 @NamedQueries({
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")})
+@EqualsAndHashCode(exclude = {"codigo", "funcionario"})
 @Data
 public class Cliente implements Serializable {
 

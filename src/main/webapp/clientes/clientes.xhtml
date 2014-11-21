@@ -15,14 +15,11 @@
                     <p:menuitem value="Editar" update=":form_dial" icon="ui-icon-pencil"
                                 oncomplete="PF('dial').show()"/>
 
-                    <!-- Implementar visualização-->
-                    <!-- Implementar adição de autorizado-->
-
                     <p:menuitem value="Excluir" update="clientes_dt" icon="ui-icon-trash"
                                 actionListener="#{clienteBean.excluir}"/>
-
                 </p:contextMenu>
-                <p:dataTable id="clientes_dt" widgetVar="clientes_wv" value="#{clienteBean.clientes}" var="cliente"
+
+                <p:dataTable id="clientes_dt"  value="#{clienteBean.clientes}" var="cliente"
                              rowKey="#{cliente.codigo}" selection="#{clienteBean.clienteAtual}" selectionMode="single"
                              paginator="true" rows="10" rowsPerPageTemplate="5 10 15 20" paginatorPosition="bottom">
                     <f:facet name="header">
@@ -49,13 +46,11 @@
             <h:form id="form_dial">
                 <p:dialog id="client_dial" widgetVar="dial" header="Editar Cliente"
                           width="600px" modal="true">
-
                     <ui:include src="/WEB-INF/templates/cliente/cliente_form.xhtml"/>
                     <p:commandButton value="Atualizar" action="#{clienteBean.atualizar()}"
                                      icon="ui-icon-disk" update=":panel"/>
                 </p:dialog>
             </h:form>
-
         </p:panel>
     </ui:define>
 </ui:composition>

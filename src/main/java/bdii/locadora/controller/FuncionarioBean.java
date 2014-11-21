@@ -61,4 +61,6 @@ public class FuncionarioBean implements Serializable {
     public void setFuncionarioAtual(Funcionario funcionarioAtual) {
         this.funcionarioAtual = funcionarioAtual;
     }
+
+
 }

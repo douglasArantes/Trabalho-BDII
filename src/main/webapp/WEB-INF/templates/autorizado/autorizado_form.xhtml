@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid columns="2">
+        <p:outputLabel for="nome" value="Nome"/>
+        <p:inputText id="nome" value="#{autorizadoBean.autorizadoAtual.nome}"/>
+        <p:outputLabel for="dt_nasc" value="Data Nascimento"/>
+        <p:inputMask id="dt_nasc" value="#{autorizadoBean.autorizadoAtual.nascimento}" mask="99/99/9999"
+                     converter="locadora.DateConverter"/>
+        <p:outputLabel for="status" value="Status"/>
+        <p:selectBooleanCheckbox id="status" value="#{autorizadoBean.autorizadoAtual.status}"/>
+        <p:outputLabel for="desc" value="Descrição"/>
+        <p:inputTextarea id="desc" value="#{autorizadoBean.autorizadoAtual.descricao}"/>
+    </h:panelGrid>
+
+</ui:composition>

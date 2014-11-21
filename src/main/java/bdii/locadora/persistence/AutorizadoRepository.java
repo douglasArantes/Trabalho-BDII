@@ -31,7 +31,7 @@ public class AutorizadoRepository implements Serializable{
         manager.remove(autorizado);
     }
 
-    public List<Autorizado> todosClientes(){
+    public List<Autorizado> todosAutorizados(){
         return manager.createNamedQuery("Autorizado.findAll", Autorizado.class).getResultList();
     }
 }

@@ -9,6 +9,7 @@ package bdii.locadora.model;
 import bdii.locadora.utils.jpa.converters.LocalDatePersistenceConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
         @NamedQuery(name = "Autorizado.findAll", query = "SELECT a FROM Autorizado a")})
 @Data
+@EqualsAndHashCode(exclude = {"codigo", "cliente"})
 @NoArgsConstructor
 @AllArgsConstructor
 public class Autorizado implements Serializable {

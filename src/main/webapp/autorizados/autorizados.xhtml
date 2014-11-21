@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Autorizados</ui:define>
+
+    <ui:define name="content">
+
+        <p:growl autoUpdate="true" closable="true"/>
+        <p:panel id="panel" header="Autorizados">
+            <h:form id="form_table">
+                <p:contextMenu for="autorizados_dt">
+                    <p:menuitem value="Editar" update=":form_dial" icon="ui-icon-pencil"
+                                oncomplete="PF('dial').show()"/>
+
+                    <p:menuitem value="Excluir" update="autorizados_dt" icon="ui-icon-trash"
+                                actionListener="#{autorizadoBean.excluir}"/>
+                </p:contextMenu>
+
+                <p:dataTable id="autorizados_dt" value="#{autorizadoBean.autorizados}" var="autorizado"
+                             selection="#{autorizadoBean.autorizadoAtual}" rowKey="#{autorizado.codigo}"
+                             selectionMode="single" paginator="true" rows="10" rowsPerPageTemplate="5 10 15 20"
+                             paginatorPosition="bottom">
+
+                    <f:facet name="header">
+                        Clique Direito para Opções!
+                    </f:facet>
+
+                    <p:column headerText="Codigo" filterBy="#{autorizado.codigo}" filterMatchMode="exact">
+                        <h:outputText value="#{autorizado.codigo}"/>
+                    </p:column>
+                    <p:column headerText="Nome" filterBy="#{autorizado.nome}" filterMatchMode="startsWith">
+                        <h:outputText value="#{autorizado.nome}"/>
+                    </p:column>
+                    <p:column headerText="Nascimento" filterBy="#{autorizado.nascimento}" filterMatchMode="exact">
+                        <h:outputText value="#{autorizado.nascimento}" converter="locadora.DateConverter"/>
+                    </p:column>
+                    <p:column headerText="Status">
+                        <h:outputText value="#{autorizado.status}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <h:form id="form_dial">
+                <p:dialog id="aut_dial" widgetVar="dial" header="Editar Autorizado" width="600px"
+                          modal="true">
+
+                    <ui:include src="/WEB-INF/templates/autorizado/autorizado_form.xhtml"/>
+                    <p:commandButton value="Atualizar" action="#{autorizadoBean.atualizar}"
+                                     icon="ui-icon-disk" update=":panel"/>
+                </p:dialog>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

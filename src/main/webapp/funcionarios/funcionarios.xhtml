@@ -9,19 +9,16 @@
     <ui:define name="content">
 
         <p:growl autoUpdate="true" closable="true"/>
-
         <p:panel id="panel" header="Funcionarios">
             <h:form>
                 <p:contextMenu for="func_dt">
                     <p:menuitem value="Editar" update=":form_dial" icon="ui-icon-pencil"
                                 oncomplete="PF('dial').show()"/>
 
-                    <!-- Implementar visualização-->
-
                     <p:menuitem value="Excluir" update="func_dt" icon="ui-icon-trash"
                                 actionListener="#{funcionarioBean.excluir}"/>
-
                 </p:contextMenu>
+
                 <p:dataTable id="func_dt" value="#{funcionarioBean.funcionarios}" var="funcionario"
                              rowKey="#{funcionario.codigo}" selection="#{funcionarioBean.funcionarioAtual}"
                              selectionMode="single" paginator="true" rows="10" rowsPerPageTemplate="5 10 15 20"

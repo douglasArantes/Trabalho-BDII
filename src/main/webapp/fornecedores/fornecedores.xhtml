@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Fornecedores</ui:define>
+
+    <ui:define name="content">
+
+        <p:growl autoUpdate="true" closable="true"/>
+        <p:panel id="panel" header="Fornecedores">
+            <h:form>
+                <p:contextMenu for="forn_dt">
+                    <p:menuitem value="Editar" update=":form_dial" icon="ui-icon-pencil"
+                                oncomplete="PF('dial').show()"/>
+
+                    <p:menuitem value="Excluir" update="forn_dt" icon="ui-icon-trash"
+                                actionListener="#{fornecedorBean.excluir}"/>
+                </p:contextMenu>
+
+                <p:dataTable id="forn_dt" value="#{fornecedorBean.fornecedores}" var="fornecedor"
+                             rowKey="#{fornecedor.codigo}" selection="#{fornecedorBean.fornecedorAtual}"
+                             selectionMode="single" paginator="true" rows="10" rowsPerPageTemplate="5 10 15 20"
+                             paginatorPosition="bottom">
+                    <f:facet name="header">
+                        Clique Direito para Opções!
+                    </f:facet>
+                    <p:column headerText="Codigo" filterBy="#{fornecedor.codigo}" filterMatchMode="exact">
+                        <h:outputText value="#{fornecedor.codigo}"/>
+                    </p:column>
+                    <p:column headerText="Nome" filterBy="#{fornecedor.nome}" filterMatchMode="startsWith">
+                        <h:outputText value="#{fornecedor.nome}"/>
+                    </p:column>
+                    <p:column headerText="Razão Social" filterBy="#{fornecedor.razaoSocial}" filterMatchMode="contains">
+                        <h:outputText value="#{fornecedor.razaoSocial}"/>
+                    </p:column>
+                    <p:column headerText="CGC" filterBy="#{fornecedor.cgc}" filterMatchMode="startsWith">
+                        <h:outputText value="#{fornecedor.cgc}"/>
+                    </p:column>
+                    <p:column headerText="Email" filterBy="#{fornecedor.email}" filterMatchMode="startsWith">
+                        <h:outputText value="#{fornecedor.email}"/>
+                    </p:column>
+                    <p:column headerText="Telefone" filterBy="#{fornecedor.telefone}" filterMatchMode="contains">
+                        <h:outputText value="#{fornecedor.telefone}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <h:form id="form_dial">
+                <p:dialog id="forn_dial" widgetVar="dial" header="Editar fornecedor"
+                          width="600px" modal="true">
+
+                    <ui:include src="/WEB-INF/templates/fornecedor/fornecedor_form.xhtml"/>
+                    <p:commandButton value="Atualizar" action="#{fornecedorBean.atualizar}"
+                                     icon="ui-icon-disk" update=":panel"/>
+                </p:dialog>
+            </h:form>
+
+        </p:panel>
+    </ui:define>
+</ui:composition>

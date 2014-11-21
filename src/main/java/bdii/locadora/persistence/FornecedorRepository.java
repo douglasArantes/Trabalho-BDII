@@ -28,10 +28,10 @@ public class FornecedorRepository implements Serializable{
 
     @Transactional
     public void excluir(Fornecedor fornecedor){
-        manager.remove(fornecedor);
+        manager.remove(manager.getReference(Fornecedor.class, fornecedor.getCodigo()));
     }
 
-    public List<Fornecedor> todosClientes(){
+    public List<Fornecedor> todosFornecedores(){
         return manager.createNamedQuery("Fornecedor.findAll", Fornecedor.class).getResultList();
     }
 }

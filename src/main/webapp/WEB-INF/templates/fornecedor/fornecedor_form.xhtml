@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid id="forn_form" columns="2">
+        <p:outputLabel for="nome" value="Nome"/>
+        <p:inputText id="nome" value="#{fornecedorBean.fornecedorAtual.nome}"/>
+        <p:outputLabel for="r_social" value="Razão Social"/>
+        <p:inputText id="r_social" value="#{fornecedorBean.fornecedorAtual.razaoSocial}"/>
+        <p:outputLabel for="cgc" value="CGC"/>
+        <p:inputText id="cgc" value="#{fornecedorBean.fornecedorAtual.cgc}"/>
+        <p:outputLabel for="email" value="Email"/>
+        <p:inputText id="email" value="#{fornecedorBean.fornecedorAtual.email}" type="email"/>
+        <p:outputLabel for="end" value="Endereço"/>
+        <p:inputText id="end" value="#{fornecedorBean.fornecedorAtual.endereco}"/>
+        <p:outputLabel for="fone" value="Telefone"/>
+        <p:inputMask id="fone" value="#{fornecedorBean.fornecedorAtual.telefone}" mask="(99)9999-9999"/>
+    </h:panelGrid>
+</ui:composition>
