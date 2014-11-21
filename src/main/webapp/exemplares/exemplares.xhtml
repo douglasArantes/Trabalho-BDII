@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Exemplares</ui:define>
+
+    <ui:define name="content">
+
+        <p:growl autoUpdate="true" closable="true"/>
+        <p:panel id="panel" header="Todos Exemplares de Recursos">
+            <h:form>
+                <p:contextMenu for="exemp_dt">
+                    <p:menuitem value="Editar" update=":form_dial" icon="ui-icon-pencil"
+                                oncomplete="PF('dial').show()"/>
+
+                    <p:menuitem value="Excluir" update="exemp_dt" icon="ui-icon-trash"
+                                actionListener="#{exemplarBean.excluir}"/>
+                </p:contextMenu>
+
+                <p:dataTable id="exemp_dt" value="#{exemplarBean.exemplares}" var="exemplar"
+                             selection="#{exemplarBean.exemplarAtual}" rowKey="#{exemplar.exemplarPK.codigoDoExemplar}"
+                             selectionMode="single" paginator="true" rows="10" rowsPerPageTemplate="5 10 15 20"
+                             paginatorPosition="bottom">
+                    <f:facet name="header">
+                        Clique Direito para Opções!
+                    </f:facet>
+                    <p:column headerText="Codigo" filterBy="#{exemplar.exemplarPK.codigoDoExemplar}"
+                              filterMatchMode="exact">
+                        <h:outputText value="#{exemplar.exemplarPK.codigoDoExemplar}"/>
+                    </p:column>
+                    <p:column headerText="Nome Recurso" filterBy="#{exemplar.recurso.nome}" filterMatchMode="contains">
+                        <h:outputText value="#{exemplar.recurso.nome}"/>
+                    </p:column>
+                    <p:column headerText="Status" filterBy="#{exemplar.status}" filterMatchMode="startsWith">
+                        <h:outputText value="#{exemplar.status}"/>
+                    </p:column>
+                    <p:column headerText="Nome Fornecedor" filterBy="#{exemplar.fornecedor.nome}"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{exemplar.fornecedor.nome}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <h:form id="form_dial">
+                <p:dialog id="exemp_dial" widgetVar="dial" header="Editar Exemplar"
+                          width="600px" modal="true">
+
+                    <ui:include src="/WEB-INF/templates/exemplar/exemplar_form.xhtml"/>
+                    <p:commandButton value="Atualizar" action="#{exemplarBean.atualizar}"
+                                     icon="ui-icon-disk" update=":panel"/>
+                </p:dialog>
+            </h:form>
+
+        </p:panel>
+    </ui:define>
+</ui:composition>

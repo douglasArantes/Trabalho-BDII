@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid columns="3">
+        <h:panelGroup>
+            <p:outputLabel value="Nome do Recurso"/>
+            <p:spacer width="10px"/>
+            <p:inputText size="10" value="#{exemplarBean.nomeDoRecurso}"/>
+            <p:spacer width="20px"/>
+            <p:commandButton value="Busca por Nome" ajax="false" update="recurso_fs"
+                             action="#{exemplarBean.buscaRecuroPorNome}"/>
+        </h:panelGroup>
+
+        <p:spacer width="30px"/>
+
+        <h:panelGroup>
+            <p:outputLabel value="Código do Recurso"/>
+            <p:spacer width="15px"/>
+            <p:inputText value="#{exemplarBean.codigoDoRecurso}" size="10"/>
+            <p:spacer width="20px"/>
+            <p:commandButton value="Buscar" ajax="false" update="recurso_fs"
+                             action="#{exemplarBean.buscaRecuroPorCodigo}"/>
+        </h:panelGroup>
+    </h:panelGrid>
+
+</ui:composition>

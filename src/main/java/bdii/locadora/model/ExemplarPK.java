@@ -6,6 +6,8 @@
 
 package bdii.locadora.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
 @Embeddable
+@Data
 public class ExemplarPK implements Serializable {
 
     @Basic(optional = false)
@@ -23,24 +26,4 @@ public class ExemplarPK implements Serializable {
     @NotNull
     @Column(name = "RECURSO_rec_codigo")
     private int codigoDoRecurso;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ExemplarPK that = (ExemplarPK) o;
-
-        if (codigoDoExemplar != that.codigoDoExemplar) return false;
-        if (codigoDoRecurso != that.codigoDoRecurso) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = codigoDoExemplar;
-        result = 31 * result + codigoDoRecurso;
-        return result;
-    }
 }

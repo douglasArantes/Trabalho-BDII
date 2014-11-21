@@ -34,4 +34,8 @@ public class FornecedorRepository implements Serializable{
     public List<Fornecedor> todosFornecedores(){
         return manager.createNamedQuery("Fornecedor.findAll", Fornecedor.class).getResultList();
     }
+
+    public Fornecedor buscaPorCodigo(int codigo){
+        return manager.find(Fornecedor.class, codigo);
+    }
 }

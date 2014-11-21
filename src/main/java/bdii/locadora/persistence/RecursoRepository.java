@@ -18,21 +18,31 @@ public class RecursoRepository implements Serializable {
     private EntityManager manager;
 
     @Transactional
-    public void salvar(Recurso recurso){
+    public void salvar(Recurso recurso) {
         manager.persist(recurso);
     }
 
     @Transactional
-    public void atualizar(Recurso recurso){
+    public void atualizar(Recurso recurso) {
         manager.merge(recurso);
     }
 
     @Transactional
-    public void excluir(Recurso recurso){
+    public void excluir(Recurso recurso) {
         manager.remove(manager.getReference(Recurso.class, recurso.getCodigo()));
     }
 
-    public List<Recurso> todosRecursos(){
+    public List<Recurso> todosRecursos() {
         return manager.createNamedQuery("Recurso.findAll", Recurso.class).getResultList();
+    }
+
+    public Recurso buscaPorNome(String nome) {
+        String jpql = "FROM Recurso rec WHERE rec.nome = :nome";
+
+        return manager.createQuery(jpql, Recurso.class).setParameter("nome", nome).getSingleResult();
+    }
+
+    public Recurso buscaPorCodigo(int codigo){
+        return manager.find(Recurso.class, codigo);
     }
 }

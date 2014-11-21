@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Cadastro de Exemplar</ui:define>
+
+    <ui:define name="content">
+        <h:form id="cad_exe_form">
+            <p:panel header="Cadastro de Recurso" style="width:1200px; margin-left:65px;">
+                <p:wizard id="cad_exe_wiz" backLabel="Voltar" nextLabel="Próximo">
+                    <p:tab title="Recurso">
+                        <ui:include src="/WEB-INF/templates/exemplar/busca_recurso.xhtml"/>
+                        <ui:include src="/WEB-INF/templates/exemplar/info/info_recurso.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Fornecedor">
+                        <ui:include src="/WEB-INF/templates/exemplar/busca_fornecedor.xhtml"/>
+                        <ui:include src="/WEB-INF/templates/exemplar/info/info_fornecedor.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Exemplar">
+                        <ui:include src="/WEB-INF/templates/exemplar/exemplar_form.xhtml"/>
+                        <p:commandButton value="Salvar" action="#{exemplarBean.salvar}"/>
+                    </p:tab>
+                </p:wizard>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

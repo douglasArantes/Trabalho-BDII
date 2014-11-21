@@ -29,7 +29,7 @@ public class ExemplarRepository implements Serializable {
 
     @Transactional
     public void excluir(Exemplar exemplar){
-        manager.remove(exemplar);
+        manager.remove(manager.getReference(Exemplar.class, exemplar.getExemplarPK()));
     }
 
     public List<Exemplar> todosRecursos(){
