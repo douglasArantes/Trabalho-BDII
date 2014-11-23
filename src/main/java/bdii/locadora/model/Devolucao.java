@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -52,8 +53,8 @@ public class Devolucao implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Funcionario funcionario;
 
-/*
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "devolucao", fetch = FetchType.LAZY)
     private List<Pagamento> pagamentos;
-*/
+
 }

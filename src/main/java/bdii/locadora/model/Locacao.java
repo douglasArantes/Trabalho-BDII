@@ -7,9 +7,7 @@
 package bdii.locadora.model;
 
 import bdii.locadora.utils.jpa.converters.LocalDatePersistenceConverter;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -51,8 +49,10 @@ public class Locacao implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "loc_preco")
+    @Setter(AccessLevel.NONE)
     private BigDecimal preco;
 
+    @Setter(AccessLevel.NONE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "locacao", fetch = FetchType.LAZY)
     private List<Devolucao> devolucoes;
 
@@ -64,6 +64,26 @@ public class Locacao implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Cliente cliente;
 
+    @Setter(AccessLevel.NONE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "locacao", fetch = FetchType.LAZY)
-    private List<ItemLocacao> itemDeLocacao;
+    private List<ItemLocacao> itensDeLocacao;
+
+
+    public void adicionarItem(ItemLocacao item){
+        itensDeLocacao.add(item);
+    }
+
+    public void removeItem(ItemLocacao item){
+        itensDeLocacao.remove(item);
+    }
+
+    public void removerTodosItens(){
+        itensDeLocacao.clear();
+    }
+
+    public BigDecimal getPreco(){
+        return preco = itensDeLocacao.stream()
+                .map(item -> item.valorItem())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 }

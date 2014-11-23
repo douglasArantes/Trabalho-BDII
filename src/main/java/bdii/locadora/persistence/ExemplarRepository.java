@@ -1,6 +1,7 @@
 package bdii.locadora.persistence;
 
 import bdii.locadora.model.Exemplar;
+import bdii.locadora.model.ExemplarPK;
 import bdii.locadora.model.Recurso;
 import bdii.locadora.utils.jpa.Transactional;
 
@@ -34,5 +35,9 @@ public class ExemplarRepository implements Serializable {
 
     public List<Exemplar> todosRecursos(){
         return manager.createNamedQuery("Exemplar.findAll", Exemplar.class).getResultList();
+    }
+
+    public Exemplar buscaPorPK(ExemplarPK pk) {
+        return manager.find(Exemplar.class, pk);
     }
 }

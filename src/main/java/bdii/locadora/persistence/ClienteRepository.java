@@ -37,4 +37,11 @@ public class ClienteRepository implements Serializable{
     public Cliente buscaPorCodigo(int codigo){
         return manager.find(Cliente.class, codigo);
     }
+
+    public Cliente buscaPorNome(String nome) {
+        String jpql = "FROM Cliente cliente WHERE cliente.nome = :nome";
+
+        return manager.createQuery(jpql, Cliente.class).setParameter("nome", nome).getSingleResult();
+    }
+
 }

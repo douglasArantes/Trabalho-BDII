@@ -8,9 +8,11 @@ package bdii.locadora.model;
 
 import bdii.locadora.utils.jpa.converters.LocalDatePersistenceConverter;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.*;
@@ -23,6 +25,7 @@ import javax.validation.constraints.Size;
 @Table(name = "item_locacao")
 @NamedQueries({
     @NamedQuery(name = "ItemLocacao.findAll", query = "SELECT i FROM ItemLocacao i")})
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemLocacao implements Serializable {
@@ -56,4 +59,7 @@ public class ItemLocacao implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Locacao locacao;
 
+    public BigDecimal valorItem(){
+        return exemplar.getRecurso().getPreco().getPreco();
+    }
 }
