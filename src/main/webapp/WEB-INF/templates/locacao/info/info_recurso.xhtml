@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:fieldset id="recurso_fs" legend="Informações do Recurso" toggleable="true"
+                rendered="#{locacaoBean.recurso != null}" style="width:650px;">
+
+        <p:panelGrid columns="4">
+            <h:outputText value="Codigo: "/>
+            <h:outputText value="#{locacaoBean.recurso.codigo}"/>
+            <h:outputText value="Nome: "/>
+            <h:outputText value="#{locacaoBean.recurso.nome}"/>
+            <h:outputText value="Data Cadastro: "/>
+            <h:outputText value="#{locacaoBean.recurso.dataCadastro}" converter="locadora.DateConverter"/>
+            <h:outputText value="Preço: "/>
+            <h:outputText value="#{locacaoBean.recurso.preco.preco}"/>
+        </p:panelGrid>
+    </p:fieldset>
+</ui:composition>

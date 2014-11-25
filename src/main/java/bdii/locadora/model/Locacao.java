@@ -12,6 +12,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -21,9 +22,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "locacao")
 @NamedQueries({
-    @NamedQuery(name = "Locacao.findAll", query = "SELECT l FROM Locacao l")})
+        @NamedQuery(name = "Locacao.findAll", query = "SELECT l FROM Locacao l")})
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Locacao implements Serializable {
 
@@ -52,9 +52,8 @@ public class Locacao implements Serializable {
     @Setter(AccessLevel.NONE)
     private BigDecimal preco;
 
-    @Setter(AccessLevel.NONE)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "locacao", fetch = FetchType.LAZY)
-    private List<Devolucao> devolucoes;
+    @OneToOne(mappedBy = "locacao")
+    private Devolucao devolucao;
 
     @JoinColumn(name = "FUNCIONARIO_fun_codigo", referencedColumnName = "fun_codigo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -68,22 +67,35 @@ public class Locacao implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "locacao", fetch = FetchType.LAZY)
     private List<ItemLocacao> itensDeLocacao;
 
-
-    public void adicionarItem(ItemLocacao item){
-        itensDeLocacao.add(item);
+    public Locacao() {
+        itensDeLocacao = new ArrayList<>();
     }
 
-    public void removeItem(ItemLocacao item){
-        itensDeLocacao.remove(item);
+    public BigDecimal getPreco() {
+        if (preco == null) {
+            calculaPreco();
+        }
+        return preco;
     }
 
-    public void removerTodosItens(){
-        itensDeLocacao.clear();
-    }
-
-    public BigDecimal getPreco(){
-        return preco = itensDeLocacao.stream()
+    public void calculaPreco() {
+        preco = itensDeLocacao.stream()
                 .map(item -> item.valorItem())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+
+    public void adicionarItem(ItemLocacao item) {
+        itensDeLocacao.add(item);
+    }
+
+    public void removeItem(ItemLocacao item) {
+        itensDeLocacao.remove(item);
+    }
+
+    public void removerTodosItens() {
+        itensDeLocacao.clear();
+    }
+
+
 }

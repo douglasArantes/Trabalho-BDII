@@ -8,6 +8,7 @@ import bdii.locadora.model.Recurso;
 import bdii.locadora.persistence.ExemplarRepository;
 import bdii.locadora.persistence.FornecedorRepository;
 import bdii.locadora.persistence.RecursoRepository;
+import bdii.locadora.utils.jsf.FacesUtil;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -63,20 +64,21 @@ public class ExemplarBean implements Serializable {
         exemplarAtual.setExemplarPK(exePK);
 
         exemplarRepository.salvar(exemplarAtual);
-
         exemplares = null;
 
         return "exemplares.xhtml?faces-redirect=true";
     }
 
-    public String atualizar() {
+    public void atualizar() {
         exemplarRepository.atualizar(exemplarAtual);
-        return "exemplares.xhtml?faces-redirect=true";
+        exemplares = null;
+        FacesUtil.addInfoMessage("Exemplar atualizado com sucesso!");
     }
 
     public void excluir(){
         exemplarRepository.excluir(exemplarAtual);
         exemplares = null;
+        FacesUtil.addInfoMessage("Exemplar excluído com sucesso!");
     }
 
     public Exemplar getExemplarAtual() {

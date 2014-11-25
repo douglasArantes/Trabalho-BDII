@@ -45,8 +45,8 @@ public class Devolucao implements Serializable {
     @Column(name = "dev_valor")
     private BigDecimal valor;
 
-    @JoinColumn(name = "LOCACAO_loc_codigo", referencedColumnName = "loc_codigo")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    //@JoinColumn(name = "LOCACAO_loc_codigo", referencedColumnName = "loc_codigo")
+    @OneToOne
     private Locacao locacao;
 
     @JoinColumn(name = "FUNCIONARIO_fun_codigo", referencedColumnName = "fun_codigo")
@@ -54,7 +54,8 @@ public class Devolucao implements Serializable {
     private Funcionario funcionario;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "devolucao", fetch = FetchType.LAZY)
-    private List<Pagamento> pagamentos;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "devolucao", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "devolucao")
+    private Pagamento pagamento;
 
 }

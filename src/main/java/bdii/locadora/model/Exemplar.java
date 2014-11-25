@@ -9,6 +9,7 @@ package bdii.locadora.model;
 import bdii.locadora.utils.jpa.converters.LocalDatePersistenceConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -50,7 +51,7 @@ public class Exemplar implements Serializable {
     private List<ItemLocacao> itensDeLocacao;
 */
     @JoinColumn(name = "RECURSO_rec_codigo", referencedColumnName = "rec_codigo", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Recurso recurso;
 
     @JoinColumn(name = "FORNECEDOR_forn_codigo", referencedColumnName = "forn_codigo")

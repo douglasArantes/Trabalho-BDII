@@ -33,8 +33,8 @@ public class FuncionarioRepository implements Serializable {
     }
 
 
-    public Funcionario buscaPorID(int id){
-        return manager.find(Funcionario.class, id);
+    public Funcionario buscaPorCodigo(int codigo){
+        return manager.find(Funcionario.class, codigo);
     }
 
     public List<Funcionario> todosFuncionarios(){

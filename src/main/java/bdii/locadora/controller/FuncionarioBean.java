@@ -3,6 +3,7 @@ package bdii.locadora.controller;
 
 import bdii.locadora.model.Funcionario;
 import bdii.locadora.persistence.FuncionarioRepository;
+import bdii.locadora.utils.jsf.FacesUtil;
 import org.primefaces.context.RequestContext;
 
 import javax.faces.event.ActionEvent;
@@ -36,14 +37,16 @@ public class FuncionarioBean implements Serializable {
         return "funcionarios.xhtml?faces-redirect=true";
     }
 
-    public String atualizar() {
+    public void atualizar() {
         funcionarioRepository.atualizar(funcionarioAtual);
-        return "funcionarios.xhtml?faces-redirect=true";
+        funcionarios = null;
+        FacesUtil.addInfoMessage("Funcionário atualizado com sucesso!");
     }
 
     public void excluir() {
         funcionarioRepository.excluir(funcionarioAtual);
         funcionarios = null;
+        FacesUtil.addInfoMessage("Funcionário excluído com sucesso!");
     }
 
     public List<Funcionario> getFuncionarios() {

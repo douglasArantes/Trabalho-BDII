@@ -4,6 +4,7 @@ package bdii.locadora.controller;
 import bdii.locadora.model.Fornecedor;
 import bdii.locadora.model.Funcionario;
 import bdii.locadora.persistence.FornecedorRepository;
+import bdii.locadora.utils.jsf.FacesUtil;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -35,14 +36,16 @@ public class FornecedorBean implements Serializable {
         return "fornecedores.xhtml?faces-redirect=true";
     }
 
-    public String atualizar() {
+    public void atualizar() {
         fornecedorRepository.atualizar(fornecedorAtual);
-        return "fornecedores.xhtml?faces-redirect=true";
+        fornecedores = null;
+        FacesUtil.addInfoMessage("Fornecedor atualizado com sucesso!");
     }
 
     public void excluir() {
         fornecedorRepository.excluir(fornecedorAtual);
         fornecedores = null;
+        FacesUtil.addInfoMessage("Fornecedor excluído com sucesso!");
     }
 
     public List<Fornecedor> getFornecedores() {

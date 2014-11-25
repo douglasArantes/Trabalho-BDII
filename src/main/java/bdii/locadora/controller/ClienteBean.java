@@ -4,9 +4,9 @@ import bdii.locadora.model.Cliente;
 import bdii.locadora.model.Funcionario;
 import bdii.locadora.persistence.ClienteRepository;
 import bdii.locadora.persistence.FuncionarioRepository;
+import bdii.locadora.utils.jsf.FacesUtil;
 import org.primefaces.context.RequestContext;
 
-import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -34,25 +34,24 @@ public class ClienteBean implements Serializable {
     }
 
     public String salvar() {
-        Funcionario func = funcionarioRepository.buscaPorID(2); //Provisório, depois pegar @Funcionario logado
+        Funcionario func = funcionarioRepository.buscaPorCodigo(2); //Provisório, depois pegar @Funcionario logado
         clienteAtual.setFuncionario(func);
         clienteRepository.salvar(this.clienteAtual);
         clientes = null;
         return "clientes.xhtml?faces-redirect=true";
     }
 
-    public String atualizar() {
+    public void atualizar() {
         clienteRepository.atualizar(clienteAtual);
-        return "clientes.xhtml?faces-redirect=true";
+        clientes = null;
+        FacesUtil.addInfoMessage("Cliente atualizado com sucesso!");
     }
 
     public void excluir(){
         clienteRepository.excluir(clienteAtual);
         clientes = null;
-        RequestContext.getCurrentInstance().update("clientes_dt");
-
+        FacesUtil.addInfoMessage("Cliente excluído com sucesso!");
     }
-
 
     public List<Cliente> getClientes() {
         if (clientes == null || clientes.isEmpty()) {

@@ -4,6 +4,8 @@ import bdii.locadora.model.Autorizado;
 import bdii.locadora.model.Cliente;
 import bdii.locadora.persistence.AutorizadoRepository;
 import bdii.locadora.persistence.ClienteRepository;
+import bdii.locadora.utils.jsf.FacesUtil;
+import org.omnifaces.util.Faces;
 
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -37,23 +39,26 @@ public class AutorizadoBean implements Serializable {
     public String salvar() {
         if(clienteAtual != null) {
             autorizadoAtual.setCliente(clienteAtual);
-            System.out.println("Cliente do Autorizado: Nome= " + autorizadoAtual.getCliente().getNome());
             autorizadoRepository.salvar(autorizadoAtual);
             autorizados = null;
             return "autorizados.xhtml?faces-redirect=true";
         }
-        else throw new RuntimeException("Precisa indicar a qual Cliente o Autorizado pertence!");
+        else {
+            FacesUtil.addErrorMessage("Precisa indicar a qual Cliente o Autorizado pertence!");
+            return null;
+        }
     }
 
-    public String atualizar() {
+    public void atualizar() {
         autorizadoRepository.atualizar(autorizadoAtual);
         autorizados = null;
-        return "autorizados.xhtml?faces-redirect=true";
+        FacesUtil.addInfoMessage("Autorizado atualizado com sucesso!");
     }
 
     public void excluir() {
         autorizadoRepository.excluir(autorizadoAtual);
         autorizados = null;
+        FacesUtil.addInfoMessage("Autorizado excluído com sucesso!");
     }
 
     public void buscaCliente(){

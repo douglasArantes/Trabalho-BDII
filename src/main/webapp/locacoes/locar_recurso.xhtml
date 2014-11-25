@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Locação de Recurso</ui:define>
+
+    <ui:define name="content">
+        <h:form id="loc_form">
+            <p:panel header="Locação de Recurso" style="width:1200px; margin-left:65px;">
+                <p:wizard id="loc_wiz" backLabel="Voltar" nextLabel="Próximo">
+                    <p:tab title="Funcionario">
+                        <ui:include src="/WEB-INF/templates/locacao/busca_funcionario.xhtml"/>
+                        <ui:include src="/WEB-INF/templates/locacao/info/info_funcionario.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Cliente">
+                        <ui:include src="/WEB-INF/templates/locacao/busca_cliente.xhtml"/>
+                        <ui:include src="/WEB-INF/templates/locacao/info/info_cliente.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Recurso">
+                        <ui:include src="/WEB-INF/templates/locacao/busca_recurso.xhtml"/>
+                        <ui:include src="/WEB-INF/templates/locacao/info/info_recurso.xhtml"/>
+
+                        <ui:include src="/WEB-INF/templates/locacao/busca_exemplar.xhtml"/>
+                        <ui:include src="/WEB-INF/templates/locacao/info/info_exemplar.xhtml"/>
+
+                        <p:commandButton value="Adicionar Item" actionListener="#{locacaoBean.adicionarItem}"
+                                         ajax="false"/>
+                    </p:tab>
+                    <p:tab title="Confirmar Locação">
+                        <p:commandButton value="Finalizar" action="#{locacaoBean.finalizar}"/>
+                    </p:tab>
+                </p:wizard>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -4,6 +4,7 @@ import bdii.locadora.model.Exemplar;
 import bdii.locadora.model.Preco;
 import bdii.locadora.model.Recurso;
 import bdii.locadora.persistence.RecursoRepository;
+import bdii.locadora.utils.jsf.FacesUtil;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -34,14 +35,17 @@ public class RecursoBean implements Serializable {
         return "recursos.xhtml?faces-redirect=true";
     }
 
-    public String atualizar() {
+    public void atualizar() {
         recursoRepository.atualizar(recursoAtual);
-        return "recursos.xhtml?faces-redirect=true";
+        recursos = null;
+        FacesUtil.addInfoMessage("Recurso atualizado com sucesso!");
+
     }
 
     public void excluir() {
         recursoRepository.excluir(recursoAtual);
         recursos = null;
+        FacesUtil.addInfoMessage("Recurso excluído com sucesso!");
     }
 
     public List<Recurso> getRecursos() {

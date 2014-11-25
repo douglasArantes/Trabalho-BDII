@@ -9,6 +9,7 @@ package bdii.locadora.model;
 import bdii.locadora.utils.jpa.converters.LocalDatePersistenceConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
@@ -24,10 +25,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "item_locacao")
 @NamedQueries({
-    @NamedQuery(name = "ItemLocacao.findAll", query = "SELECT i FROM ItemLocacao i")})
+        @NamedQuery(name = "ItemLocacao.findAll", query = "SELECT i FROM ItemLocacao i")})
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = "exemplar")
 public class ItemLocacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,16 +51,21 @@ public class ItemLocacao implements Serializable {
     private String status;
 
     @JoinColumns({
-        @JoinColumn(name = "EXEMPLAR_exe_codigo", referencedColumnName = "exe_codigo"),
-        @JoinColumn(name = "EXEMPLAR_RECURSO_rec_codigo", referencedColumnName = "RECURSO_rec_codigo")})
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+            @JoinColumn(name = "EXEMPLAR_exe_codigo", referencedColumnName = "exe_codigo"),
+            @JoinColumn(name = "EXEMPLAR_RECURSO_rec_codigo", referencedColumnName = "RECURSO_rec_codigo")})
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Exemplar exemplar;
 
     @JoinColumn(name = "LOCACAO_loc_codigo", referencedColumnName = "loc_codigo")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Locacao locacao;
 
-    public BigDecimal valorItem(){
+    public BigDecimal valorItem() {
         return exemplar.getRecurso().getPreco().getPreco();
+    }
+
+    public ItemLocacao() {
+        dataDevolucao = LocalDate.now().plusDays(14);
+        status = "Em aguardo de devoluçao";
     }
 }

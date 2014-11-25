@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:fieldset id="exemplar_fs" legend="Informações do Exemplar" toggleable="true"
+                rendered="#{locacaoBean.exemplar != null}" style="width:650px;">
+        <p:panelGrid columns="4">
+            <h:outputText value="Codigo: "/>
+            <h:outputText value="#{locacaoBean.exemplar.exemplarPK.codigoDoExemplar}"/>
+            <h:outputText value="Data Cadastro: "/>
+            <h:outputText value="#{locacaoBean.exemplar.data}" converter="locadora.DateConverter"/>
+            <h:outputText value="Status: "/>
+            <h:outputText value="#{locacaoBean.exemplar.status}"/>
+        </p:panelGrid>
+    </p:fieldset>
+</ui:composition>

@@ -50,7 +50,7 @@ public class Pagamento implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pagamento", fetch = FetchType.LAZY)
     private List<FluxoCaixa> fluxosDeCaixa;
 
-    @JoinColumn(name = "DEVOLUCAO_dev_codigo", referencedColumnName = "dev_codigo")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    //@JoinColumn(name = "DEVOLUCAO_dev_codigo", referencedColumnName = "dev_codigo")
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Devolucao devolucao;
 }

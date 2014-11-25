@@ -1,0 +1,13 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid columns="3">
+        <h:outputText value="Código do Cliente"/>
+        <p:inputText value="#{locacaoBean.codigoDoCliente}" size="8"/>
+        <p:commandButton value="Buscar" action="#{locacaoBean.buscarClientePorCodigo}" ajax="false"
+                         update=":cliente_fs"/>
+    </h:panelGrid>
+
+</ui:composition>
