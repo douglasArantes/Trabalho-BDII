@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Verificar Disponibilidade</ui:define>
+
+    <ui:define name="content">
+        <p:panel header="Verificar Disponibilidade" style="width:1200px; margin-left:65px;">
+            <h:form>
+                <p:outputLabel for="cod" value="Código"/>
+                <p:inputText id="cod" value="#{recursoBean.codigoRecurso}"/>
+                <p:commandButton value="Pesquisar" action="#{recursoBean.buscaPorCodigo}" ajax="false"
+                                 icon="ui-icon-disk" update="recurso_fs"/>
+
+                <p:fieldset id="recurso_fs" legend="Informações do Recurso" toggleable="true"
+                            rendered="#{recursoBean.recursoAtual.codigo != null}" style="width:650px;">
+                    <p:panelGrid columns="6">
+                        <h:outputText value="Codigo: "/>
+                        <h:outputText value="#{recursoBean.recursoAtual.codigo}"/>
+                        <h:outputText value="Nome: "/>
+                        <h:outputText value="#{recursoBean.recursoAtual.nome}"/>
+                        <h:outputText value="Disponibilidade: "/>
+                        <h:outputText value="#{recursoBean.recursoAtual.quantidadeRecursosDisponiveis} Recursos diponíveis"/>
+                    </p:panelGrid>
+                </p:fieldset>
+
+
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

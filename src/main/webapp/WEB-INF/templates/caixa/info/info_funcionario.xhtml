@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:fieldset id="funcionario_fs" legend="Informações do Funcionario" toggleable="true"
+                rendered="#{caixaBean.funcionario != null}" style="width:650px;">
+        <p:panelGrid columns="4">
+            <h:outputText value="Codigo: "/>
+            <h:outputText value="#{caixaBean.funcionario.codigo}"/>
+            <h:outputText value="Nome: "/>
+            <h:outputText value="#{caixaBean.funcionario.nome}"/>
+            <h:outputText value="Email: "/>
+            <h:outputText value="#{caixaBean.funcionario.email}"/>
+            <h:outputText value="Data Cadastro: "/>
+            <h:outputText value="#{caixaBean.funcionario.telefone}"/>
+        </p:panelGrid>
+    </p:fieldset>
+</ui:composition>

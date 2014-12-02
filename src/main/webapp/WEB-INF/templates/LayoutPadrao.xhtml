@@ -35,7 +35,7 @@
                 <p:menubar styleClass="menu-sistema">
                     <p:submenu label="Funcionarios">
                         <p:menuitem value="Cadastar" url="/funcionarios/cadastro_funcionario.xhtml"/>
-                        <p:menuitem value="Listar"   url="/funcionarios/funcionarios.xhtml"/>
+                        <p:menuitem value="Listar" url="/funcionarios/funcionarios.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Clientes">
                         <p:menuitem value="Cadastrar" url="/clientes/cadastro_cliente.xhtml"/>
@@ -52,10 +52,15 @@
                     <p:submenu label="Recursos">
                         <p:menuitem value="Cadastrar" url="/recursos/cadastro_recurso.xhtml"/>
                         <p:menuitem value="Listar" url="/recursos/recursos.xhtml"/>
+                        <p:menuitem value="Verificar Disponibilidade" url="/recursos/verificar_disponibilidade.xhtml"/>
                         <p:menuitem value="Cadastrar Exemplar" url="/exemplares/exemplar_cadastro.xhtml"/>
                         <p:menuitem value="Listar Exemplares" url="/exemplares/exemplares.xhtml"/>
-
-
+                    </p:submenu>
+                    <p:submenu label="Locações">
+                        <p:menuitem value="Locar Recurso" url="/locacoes/locar_recurso.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Caixa">
+                        <p:menuitem value="Cadastrar Caixa Inicial" url="/caixa/cadastro_caixa.xhtml"/>
                     </p:submenu>
                 </p:menubar>
             </h:form>

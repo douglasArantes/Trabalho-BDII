@@ -20,6 +20,7 @@ public class RecursoBean implements Serializable {
 
     private Recurso recursoAtual;
     private List<Recurso> recursos;
+    private int codigoRecurso;
 
     @Inject
     private RecursoRepository recursoRepository;
@@ -48,6 +49,10 @@ public class RecursoBean implements Serializable {
         FacesUtil.addInfoMessage("Recurso excluído com sucesso!");
     }
 
+    public void buscaPorCodigo() {
+        recursoAtual = recursoRepository.buscaPorCodigo(codigoRecurso);
+    }
+
     public List<Recurso> getRecursos() {
         if (recursos == null || recursos.isEmpty()) {
             return recursos = recursoRepository.todosRecursos();
@@ -56,7 +61,7 @@ public class RecursoBean implements Serializable {
         }
     }
 
-    public void setDataAtualParaPreco(){
+    public void setDataAtualParaPreco() {
         recursoAtual.getPreco().setData(LocalDate.now());
     }
 
@@ -68,4 +73,11 @@ public class RecursoBean implements Serializable {
         this.recursoAtual = recurso;
     }
 
+    public int getCodigoRecurso() {
+        return codigoRecurso;
+    }
+
+    public void setCodigoRecurso(int codigoRecurso) {
+        this.codigoRecurso = codigoRecurso;
+    }
 }

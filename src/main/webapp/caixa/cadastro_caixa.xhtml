@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Cadastro de Caixa</ui:define>
+
+    <ui:define name="content">
+        <p:panel header="Cadastro de Caixa" style="width:1200px; margin-left:65px;">
+            <h:form>
+                <p:wizard id="caixa_wiz" backLabel="Voltar" nextLabel="Próximo">
+                    <p:tab title="Funcionario">
+                        <ui:include src="/WEB-INF/templates/caixa/busca_funcionario.xhtml"/>
+                        <ui:include src="/WEB-INF/templates/caixa/info/info_funcionario.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Cadastro Caixa inicial">
+                        <ui:include src="/WEB-INF/templates/caixa/caixa_form.xhtml"/>
+                        <p:commandButton value="Cadastrar" action="#{caixaBean.cadastrarCaixaInicial}" ajax="false"/>
+                    </p:tab>
+                </p:wizard>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

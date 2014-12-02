@@ -15,14 +15,17 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import static java.util.stream.Collectors.toList;
+
 @Entity
 @Table(name = "recurso")
 @NamedQueries({
-    @NamedQuery(name = "Recurso.findAll", query = "SELECT r FROM Recurso r")})
+        @NamedQuery(name = "Recurso.findAll", query = "SELECT r FROM Recurso r")})
 @Data
 @AllArgsConstructor
 public class Recurso implements Serializable {
@@ -59,9 +62,16 @@ public class Recurso implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso", fetch = FetchType.LAZY)
     private List<Exemplar> exemplares;
 
-    public Recurso(){
+    public Recurso() {
         this.dataCadastro = LocalDate.now();
     }
+
+    public long getQuantidadeRecursosDisponiveis() {
+        return getExemplares().stream()
+                .filter(exemplar -> exemplar.getStatus().equalsIgnoreCase("Disponivel"))
+                .count();
+    }
+
 /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso", fetch = FetchType.LAZY)
     private List<Reserva> reservas;
