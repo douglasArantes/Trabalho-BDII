@@ -9,18 +9,13 @@ package bdii.locadora.model;
 import bdii.locadora.utils.jpa.converters.LocalDatePersistenceConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import static java.util.stream.Collectors.toList;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "recurso")

@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+    <ui:define name="titulo">Locações</ui:define>
+
+    <ui:define name="content">
+
+        <p:growl autoUpdate="true" closable="true"/>
+        <p:panel id="panel" header="Locações">
+            <h:form>
+
+                <p:contextMenu for="loc_dt">
+                    <p:menuitem value="Recursos Locados" update=":loc_dial" icon="ui-icon-pencil"
+                                oncomplete="PF('dial').show()"/>
+                </p:contextMenu>
+
+
+                <p:dataTable id="loc_dt" value="#{locacaoBean.locacoes}" var="locacao"
+                             rowKey="#{locacao.codigo}" selection="#{locacaoBean.locacao}"
+                             selectionMode="single" paginator="true" rows="10" rowsPerPageTemplate="5 10 15 20"
+                             paginatorPosition="bottom">
+                    <f:facet name="header">
+                        Clique Direito para visualizar os recursos locados!
+                    </f:facet>
+                    <p:column headerText="Codigo" filterBy="#{locacao.codigo}" filterMatchMode="exact">
+                        <h:outputText value="#{locacao.codigo}"/>
+                    </p:column>
+                    <p:column headerText="Cliente" filterBy="#{locacao.cliente.nome}" filterMatchMode="contains">
+                        <h:outputText value="#{locacao.cliente.nome}"/>
+                    </p:column>
+                    <p:column headerText="Data Locação" filterBy="#{locacao.data}" filterMatchMode="contains">
+                        <h:outputText value="#{locacao.data}" converter="locadora.DateConverter"/>
+                    </p:column>
+                    <p:column headerText="Data Vencimento" filterBy="#{locacao.dataVencimento}"
+                              filterMatchMode="startsWith">
+                        <h:outputText value="#{locacao.dataVencimento}" converter="locadora.DateConverter"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+            <p:dialog id="loc_dial" widgetVar="dial" header="Editar Autorizado" width="600px"
+                      modal="true">
+
+                <p:dataList value="#{locacaoBean.locacao.itensDeLocacao}" var="item" type="ordered">
+                    <f:facet name="header">
+                        Recursos Locados
+                    </f:facet>
+                    #{item.exemplar.recurso.nome}
+                </p:dataList>
+            </p:dialog>
+
+        </p:panel>
+    </ui:define>
+</ui:composition>

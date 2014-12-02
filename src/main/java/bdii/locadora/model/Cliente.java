@@ -12,16 +12,20 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import static java.util.stream.Collectors.toList;
 
 //ESTA CLASSE ESTÁ OK
 
 @Entity
 @Table(name = "cliente")
 @NamedQueries({
-    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")})
+        @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")})
 @EqualsAndHashCode(exclude = {"codigo", "funcionario"})
 @Data
 public class Cliente implements Serializable {
@@ -113,7 +117,7 @@ public class Cliente implements Serializable {
     @Column(name = "cl_obs", length = 512)
     private String observacoes;
 
-    public Cliente(){
+    public Cliente() {
         this.dataCadastro = LocalDate.now();
     }
 
@@ -121,18 +125,22 @@ public class Cliente implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Funcionario funcionario;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.LAZY)
+    private List<Locacao> locacoes;
+
+    public List<Recurso> getTodosRecursosLocados() {
+        return locacoes.stream()
+                .map(loc -> loc.getItensDeLocacao())
+                .flatMap(itens -> itens.stream())
+                .map(item -> item.getExemplar().getRecurso())
+                .distinct()
+                .collect(toList());
+    }
+
     /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Autorizado> autorizados;
 */
-
-/*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.LAZY)
-    private List<Locacao> locacoes;
-*/
-
-
-
 
 /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.LAZY)

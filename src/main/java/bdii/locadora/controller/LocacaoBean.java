@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Named
 @ViewScoped
@@ -20,6 +21,7 @@ public class LocacaoBean implements Serializable {
     private Funcionario funcionario;
     private Recurso recurso;
     private Exemplar exemplar;
+    private List<Locacao> locacoes;
 
     @Inject
     private LocacaoRepository locacaoRepository;
@@ -96,55 +98,21 @@ public class LocacaoBean implements Serializable {
 
         locacaoRepository.salvar(locacao);
 
-        return "branco.xhtml?faces-redirect=true";
+        return "/exemplares/exemplares.xhtml?faces-redirect=true";
+    }
 
+    public List<Locacao> getLocacoes() {
+        if (locacoes == null || locacoes.isEmpty()) {
+            return locacoes = locacaoRepository.todasLocacoes();
+        } else {
+            return locacoes;
+        }
     }
 
     private void autualizaExemplar(Exemplar exemplar){
         exemplarRepository.atualizar(exemplar);
     }
 
-    /*
-    * Apenas um teste antes de implementar a tela
-    * */
-/*
-    public String simulaLocacao(){
-        locacao = new Locacao();
-
-        cliente = clienteRepository.buscaPorCodigo(1);
-        System.out.println("Cliente Nome: " + cliente.getNome());
-
-        funcionario = funcionarioRepository.buscaPorCodigo(1);
-        System.out.println("Funcionario Nome: " + funcionario.getNome());
-
-        recurso = recursoRepository.buscaPorCodigo(8);
-        System.out.println("Recurso Nome: " + recurso.getNome());
-
-        ExemplarPK pk = new ExemplarPK();
-        pk.setCodigoDoExemplar(1);
-        pk.setCodigoDoRecurso(8);
-        exemplar = exemplarRepository.buscaPorPK(pk);
-        System.out.println("Exemplar Codigo: " + exemplar.getExemplarPK().getCodigoDoExemplar());
-
-        ItemLocacao item = new ItemLocacao();
-        item.setExemplar(exemplar);
-        item.setStatus("Teste");
-        item.setDataDevolucao(LocalDate.now().plusDays(14));
-        item.setLocacao(locacao);
-
-        locacao.adicionarItem(item);
-        locacao.setCliente(cliente);
-        locacao.setData(LocalDate.now());
-        locacao.setFuncionario(funcionario);
-        locacao.setStatus("Teste");
-        locacao.getPreco();
-
-        locacaoRepository.salvar(locacao);
-
-        return "branco.xhtml?faces-redirect=true";
-    }
-
-*/
     public Locacao getLocacao() {
         return locacao;
     }

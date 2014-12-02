@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -95,6 +96,13 @@ public class Locacao implements Serializable {
 
     public void removerTodosItens() {
         itensDeLocacao.clear();
+    }
+
+    public LocalDate getDataVencimento(){
+        return getItensDeLocacao().stream()
+                .map(ItemLocacao::getDataDevolucao)
+                .min(Comparator.<LocalDate>naturalOrder())
+                .get();
     }
 
 

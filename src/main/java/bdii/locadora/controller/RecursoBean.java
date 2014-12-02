@@ -40,7 +40,6 @@ public class RecursoBean implements Serializable {
         recursoRepository.atualizar(recursoAtual);
         recursos = null;
         FacesUtil.addInfoMessage("Recurso atualizado com sucesso!");
-
     }
 
     public void excluir() {
@@ -51,6 +50,10 @@ public class RecursoBean implements Serializable {
 
     public void buscaPorCodigo() {
         recursoAtual = recursoRepository.buscaPorCodigo(codigoRecurso);
+
+        if(recursoAtual == null){
+            FacesUtil.addInfoMessage("Nenhum Recurso encontrado!");
+        }
     }
 
     public List<Recurso> getRecursos() {
