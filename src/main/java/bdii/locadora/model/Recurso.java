@@ -59,6 +59,7 @@ public class Recurso implements Serializable {
 
     public Recurso() {
         this.dataCadastro = LocalDate.now();
+        this.preco = new Preco();
     }
 
     public long getQuantidadeRecursosDisponiveis() {

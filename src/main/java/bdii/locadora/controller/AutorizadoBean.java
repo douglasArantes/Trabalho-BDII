@@ -63,7 +63,6 @@ public class AutorizadoBean implements Serializable {
 
     public void buscaCliente(){
         clienteAtual = clienteRepository.buscaPorCodigo(codigoDoCliente);
-        System.out.println(clienteAtual.getCodigo() + clienteAtual.getNome());
     }
 
     public Autorizado getAutorizadoAtual() {
@@ -87,5 +86,13 @@ public class AutorizadoBean implements Serializable {
 
     public void setCodigoDoCliente(int codigoDoCliente) {
         this.codigoDoCliente = codigoDoCliente;
+    }
+
+    public Cliente getClienteAtual() {
+        return clienteAtual;
+    }
+
+    public void setClienteAtual(Cliente clienteAtual) {
+        this.clienteAtual = clienteAtual;
     }
 }

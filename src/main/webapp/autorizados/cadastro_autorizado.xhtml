@@ -10,7 +10,9 @@
         <p:panel header="Cadastro de Autorizado" style="width:1200px; margin-left:65px;">
             <h:form>
                 <p:inputText value="#{autorizadoBean.codigoDoCliente}" placeholder="Digite o Código do Cliente"/>
-                <p:commandButton value="Busca Cliente" actionListener="#{autorizadoBean.buscaCliente}" ajax="false"/>
+                <p:commandButton value="Busca Cliente" actionListener="#{autorizadoBean.buscaCliente}" ajax="false"
+                                 update=":cliente_fs"/>
+                <ui:include src="/WEB-INF/templates/autorizado/info/info_cliente.xhtml"/>
             </h:form>
 
             <h:form>

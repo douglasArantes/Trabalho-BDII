@@ -38,7 +38,7 @@
                         <h:outputText value="#{autorizado.nascimento}" converter="locadora.DateConverter"/>
                     </p:column>
                     <p:column headerText="Status">
-                        <h:outputText value="#{autorizado.status}"/>
+                        <h:outputText value="#{autorizado.status == true ? 'Ativo' : 'Inativo'}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

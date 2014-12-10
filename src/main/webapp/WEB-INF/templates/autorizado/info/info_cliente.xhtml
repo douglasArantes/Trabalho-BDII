@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:fieldset id="cliente_fs" legend="Informações do Cliente" toggleable="true"
+                rendered="#{autorizadoBean.clienteAtual != null}" style="width:650px;">
+        <p:panelGrid columns="4">
+            <h:outputText value="Codigo: "/>
+            <h:outputText value="#{autorizadoBean.clienteAtual.codigo}"/>
+            <h:outputText value="Nome: "/>
+            <h:outputText value="#{autorizadoBean.clienteAtual.nome}"/>
+            <h:outputText value="CPF: "/>
+            <h:outputText value="#{autorizadoBean.clienteAtual.cpf}"/>
+            <h:outputText value="Data Cadastro: "/>
+            <h:outputText value="#{autorizadoBean.clienteAtual.dataCadastro}" converter="locadora.DateConverter"/>
+        </p:panelGrid>
+    </p:fieldset>
+</ui:composition>
